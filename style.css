@@ -1,0 +1,49 @@
+.logo {
+    width: 50px;
+    height: 50px;
+    background-color: #808080;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 2rem;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.buttons button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttons .login {
+    background-color: #d3d3d3;
+}
+
+.buttons .mentors {
+    background-color: #808080;
+    color: white;
+}
