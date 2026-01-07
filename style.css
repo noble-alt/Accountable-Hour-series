@@ -1,331 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quattrocento&display=swap');
-
-html {
-    scroll-behavior: smooth;
+.logo {
+    width: 50px;
+    height: 50px;
+    background-color: #808080;
 }
 
-body {
-    font-family: 'Quattrocento', serif;
-    margin: 0;
-    background-color: #fdfdfd;
-    color: #333;
-}
-
-header {
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 80px;
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
+    padding: 1rem 2rem;
 }
 
-header .logo img {
-    display: block;
-}
-
-header nav ul {
+nav ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-header nav ul li {
-    margin: 0 20px;
+nav ul li {
+    margin-right: 2rem;
 }
 
-header nav ul li a {
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav a {
     text-decoration: none;
-    color: #333;
-    font-size: 1.1em;
+    color: black;
 }
 
-header .buttons button {
-    margin-left: 15px;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    background-color: #e8e8e8;
-    color: #333;
-    font-size: 1em;
-}
-
-header .buttons button:last-child {
-    background-color: #8e7d6b;
-    color: #fff;
-}
-
-.hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 120px 20px;
-    background-color: #f5f5f5;
-}
-
-.hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 4em;
-    margin-bottom: 20px;
-    max-width: 800px;
-}
-
-.hero p {
-    font-size: 1.3em;
-    margin-bottom: 40px;
-    max-width: 600px;
-    line-height: 1.6;
-}
-
-.hero button {
-    padding: 18px 40px;
+.buttons button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
-    background-color: #8e7d6b;
-    color: #fff;
     cursor: pointer;
-    font-size: 1.1em;
 }
 
-.what-we-offer {
-    text-align: center;
-    padding: 80px 20px;
+.buttons .login {
+    background-color: #d3d3d3;
 }
 
-.what-we-offer h2, .featured-mentors h2, .our-story h2, .events h2, .services h2, .gallery h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 50px;
-}
-
-.what-we-offer .offer-boxes {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
-    flex-wrap: wrap;
-}
-
-.what-we-offer .box {
-    width: 280px;
-    height: 280px;
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-}
-
-.what-we-offer .box:hover {
-    transform: translateY(-10px);
-}
-
-.what-we-offer .box-icon {
-    width: 60px;
-    height: 60px;
-    background-color: #8e7d6b;
-    margin-bottom: 20px;
-    border-radius: 50%;
-}
-
-.what-we-offer .box h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.5em;
-    color: #333;
-    margin: 10px 0 0 0;
-}
-
-.featured-mentors {
-    text-align: center;
-    padding: 80px 20px;
-    background-color: #f5f5f5;
-}
-
-.featured-mentors .mentor-cards {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
-    flex-wrap: wrap;
-}
-
-.featured-mentors .card {
-    width: 280px;
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.featured-mentors .card img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    display: block;
-}
-
-.featured-mentors .card-content {
-    padding: 20px;
-}
-
-.featured-mentors .card-content h3 {
-    font-family: 'DM Serif Display', serif;
-    margin: 10px 0 5px 0;
-}
-
-.featured-mentors .card-content p {
-    color: #777;
-    margin: 0;
-}
-
-.our-story, .services, .gallery {
-    text-align: center;
-    padding: 80px 20px;
-}
-
-.our-story p, .services p, .gallery p {
-    max-width: 800px;
-    margin: 20px auto;
-    line-height: 1.6;
-    font-size: 1.1em;
-}
-
-.our-story .stats {
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    margin-top: 40px;
-}
-
-.our-story .stats h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 3em;
-    margin: 0;
-    color: #8e7d6b;
-}
-
-.our-story .stats p {
-    font-size: 1.1em;
-    color: #777;
-}
-
-.events {
-    padding: 80px 20px;
-    background-color: #f5f5f5;
-}
-
-.events .event-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    max-width: 900px;
-    margin: 50px auto;
-}
-
-.events .event {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.events .event-image img {
-    border-radius: 5px;
-    display: block;
-}
-
-.events .event-details h3 {
-    font-family: 'DM Serif Display', serif;
-}
-
-.events .event-details a {
-    color: #8e7d6b;
-    text-decoration: none;
-    font-weight: bold;
-}
-.events .event-details a:hover {
-    text-decoration: underline;
-}
-
-.join-the-movement {
-    text-align: center;
-    padding: 80px 20px;
-    background-color: #3a3a3a;
-    color: #fff;
-}
-
-.join-the-movement h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.5em;
-    color: #fff;
-    margin-bottom: 20px;
-}
-
-.join-the-movement p {
-    font-size: 1.2em;
-    max-width: 600px;
-    margin: 0 auto 40px auto;
-    color: #f0f0f0;
-}
-
-.join-the-movement button {
-    padding: 18px 40px;
-    border: 2px solid #fff;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: all 0.3s ease;
-}
-
-.join-the-movement button:hover {
-    background-color: #fff;
-    color: #3a3a3a;
-}
-
-footer {
-    padding: 60px 80px;
-    background-color: #2b2b2b;
-    color: #fff;
-    text-align: center;
-}
-
-footer .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    margin-bottom: 40px;
-}
-
-footer .footer-links ul {
-    list-style: none;
-    padding: 0;
-}
-
-footer .footer-links ul li a {
-    text-decoration: none;
-    color: #ccc;
-    margin-bottom: 10px;
-    display: inline-block;
-    transition: color 0.3s;
-}
-
-footer .footer-links ul li a:hover {
-    color: #fff;
+.buttons .mentors {
+    background-color: #808080;
+    color: white;
 }
