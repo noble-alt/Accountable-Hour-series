@@ -81,7 +81,7 @@ header .buttons button:last-child {
     line-height: 1.6;
 }
 
-.hero button, .join-the-movement button {
+.hero button {
     padding: 18px 40px;
     border: none;
     border-radius: 5px;
@@ -96,7 +96,7 @@ header .buttons button:last-child {
     padding: 80px 20px;
 }
 
-.what-we-offer h2, .featured-mentors h2, .our-story h2, .events h2, .join-the-movement h2 {
+.what-we-offer h2, .featured-mentors h2, .our-story h2, .events h2, .services h2, .gallery h2 {
     font-family: 'DM Serif Display', serif;
     font-size: 2.5em;
     color: #333;
@@ -190,12 +190,12 @@ header .buttons button:last-child {
     margin: 0;
 }
 
-.our-story {
+.our-story, .services, .gallery {
     text-align: center;
     padding: 80px 20px;
 }
 
-.our-story p {
+.our-story p, .services p, .gallery p {
     max-width: 800px;
     margin: 20px auto;
     line-height: 1.6;
@@ -265,12 +265,38 @@ header .buttons button:last-child {
 .join-the-movement {
     text-align: center;
     padding: 80px 20px;
+    background-color: #3a3a3a;
+    color: #fff;
+}
+
+.join-the-movement h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5em;
+    color: #fff;
+    margin-bottom: 20px;
 }
 
 .join-the-movement p {
     font-size: 1.2em;
     max-width: 600px;
-    margin: 20px auto 40px auto;
+    margin: 0 auto 40px auto;
+    color: #f0f0f0;
+}
+
+.join-the-movement button {
+    padding: 18px 40px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+.join-the-movement button:hover {
+    background-color: #fff;
+    color: #3a3a3a;
 }
 
 footer {
