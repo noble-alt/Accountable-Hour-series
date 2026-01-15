@@ -3,49 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Accountable Series</title>
-    <link rel="stylesheet" href="auth.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="sign-up.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="login-page">
-
+<body>
     <div class="login-container">
-        <div class="logo-box"></div>
-
-        <h1>Welcome</h1>
-        <h2>Sign in as:</h2>
-
-        <div class="role-selector">
-            <button class="role-btn">Mentee</button>
-        </div>
-
-        <form class="login-form">
-            <div class="input-group">
-                <div class="input-icon-left">
-                    <i class="fa-regular fa-envelope"></i>
-                </div>
-                <div class="input-field">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" value="Accountablehourseries@gmail.com">
-                </div>
-                <div class="input-icon-right">
-                    <i class="fa-regular fa-circle-check"></i>
-                </div>
+        <div class="login-box">
+            <h1>Welcome</h1>
+            <div class="toggle-buttons">
+                <button id="signup-btn" class="active">sign up</button>
+                <button id="signin-btn">Sign in</button>
             </div>
-
-            <button type="button" class="btn-continue">Continue</button>
-        </form>
-
-        <div class="divider">
-            <span>Or Continue With</span>
-        </div>
-
-        <div class="social-login">
-            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"></a>
-            <a href="#"><img src="https://www.pinterest.com/pin/340584790598840834" alt="Facebook"></a>
-            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" class="apple-icon" alt="Apple"></a>
+            <p class="toggle-message">No Account, Sign up!!</p>
+            <form id="login-form">
+                <div class="input-group" id="fullname-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Fullname">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" value="Accountablehourseries@gmail.com">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" value="********************">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <button type="submit" class="continue-btn">Continue</button>
+            </form>
+            <div class="or-divider">
+                <span>Or Continue With</span>
+            </div>
+            <div class="social-login">
+                <i class="fab fa-google"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-apple"></i>
+            </div>
         </div>
     </div>
-
+    <script src="sign-up.js"></script>
 </body>
 </html>

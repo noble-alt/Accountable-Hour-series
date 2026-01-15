@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const adminDashboard = document.getElementById("admin-dashboard");
     const totalUsers = document.getElementById("total-users");
     const totalPosts = document.getElementById("total-posts");
+    const usersTableBody = document.getElementById("users-table-body");
 
     let token = null;
 
@@ -27,12 +28,31 @@ document.addEventListener("DOMContentLoaded", () => {
             adminLogin.style.display = "none";
             adminDashboard.style.display = "block";
             fetchStats();
+            fetchUsers();
         } else {
             alert("Invalid credentials");
         }
     });
 
     const fetchStats = async () => {
+        if (!token) {
+            token = localStorage.getItem('adminToken');
+        }
+        if (!token) {
+            console.error('No token found');
+            return;
+        }
+
+        const postsResponse = await fetch("/posts", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const posts = await postsResponse.json();
+        totalPosts.textContent = posts.length;
+    };
+
+    const fetchUsers = async () => {
         if (!token) {
             token = localStorage.getItem('adminToken');
         }
@@ -49,12 +69,30 @@ document.addEventListener("DOMContentLoaded", () => {
         const users = await usersResponse.json();
         totalUsers.textContent = users.length;
 
-        const postsResponse = await fetch("/posts", {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
+        usersTableBody.innerHTML = "";
+        users.forEach(user => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${user.fullname}</td>
+                <td>${user.email}</td>
+                <td><button class="delete-button" data-email="${user.email}">Delete</button></td>
+            `;
+            usersTableBody.appendChild(row);
         });
-        const posts = await postsResponse.json();
-        totalPosts.textContent = posts.length;
     };
+
+    usersTableBody.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("delete-button")) {
+            const email = e.target.dataset.email;
+            if (confirm(`Are you sure you want to delete the user with email ${email}?`)) {
+                await fetch(`/users/${email}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+                fetchUsers();
+            }
+        }
+    });
 });
