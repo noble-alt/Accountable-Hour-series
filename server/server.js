@@ -99,9 +99,30 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-app.get('/users', authMiddleware, async (req, res) => {
+const adminMiddleware = (req, res, next) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ message: 'Forbidden' });
+    }
+    next();
+};
+
+app.get('/users', authMiddleware, adminMiddleware, async (req, res) => {
     const db = await getUsers();
     res.json(db.users || []);
+});
+
+app.delete('/users/:email', authMiddleware, adminMiddleware, async (req, res) => {
+    const { email } = req.params;
+    const db = await getUsers();
+    const userIndex = db.users.findIndex(user => user.email === email);
+
+    if (userIndex === -1) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    db.users.splice(userIndex, 1);
+    await saveUsers(db);
+    res.status(200).json({ message: 'User deleted successfully' });
 });
 
 app.get('/posts', authMiddleware, async (req, res) => {
