@@ -1,0 +1,142 @@
+/* 1. Global Styles & Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-dark: #0A0E0F;
+    --accent-gold: #C68E53;
+    --text-white: #FFFFFF;
+    --text-muted: #B0B0B0;
+    --footer-bg: #F2F2E1;
+    --footer-text: #333333;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+}
+
+/* 2. Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+}
+
+.logo {
+    width: 100px;
+    height: 40px;
+    background: #444; /* Placeholder for your logo image */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.nav-links a.active {
+    border-bottom: 2px solid var(--accent-gold);
+    opacity: 1;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.btn-login {
+    background: #E8E8D5; /* Matches the slight off-white of the UI buttons */
+    color: #000;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-mentors {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-mentors:hover {
+    color: var(--accent-gold); /* Subtle highlight on hover */
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    filter: brightness(0.9); /* Matches the moody dark theme */
+    transition: transform 0.4s ease;
+}
+
+.grid-item:hover img {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+/* 3. Hero & Main Gallery Grid */
+.hero-section {
+    padding: 60px 5%;
+}
+
+.hero-text {
+    max-width: 600px;
+    margin-bottom: 50px;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Complex Grid Logic */
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 250px;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item1 { grid-column: 3 / 5; grid-row: 1 / 3; } /* Large Right */
+.item2 { grid-column: 1 / 3; grid-row: 1 / 2; } /* Top Left Wide */
+.item3 { grid-column: 1 / 2; grid-row: 2 / 3; } /* Small Square */
+.item4 { grid-column: 2 / 3; grid-row: 2 / 3; } /* Small Square */
+.item5 { grid-column: 3 / 5; grid-row: 2 / 3}
+

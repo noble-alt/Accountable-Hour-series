@@ -1,0 +1,159 @@
+/* Precise Dark Theme Variables */
+:root {
+    --dark-bg: #0A191E;      /* The deep dark teal/black background */
+    --text-white: #FFFFFF;
+    --accent-tan: #B68347;   /* The warm ochre from the button */
+    --border-muted: #2A3C3F; /* Subtle border for roles */
+    --input-border: #4A3B2A; /* The specific tan border on input */
+    --input-bg: #11252B;     /* Slightly lighter than background */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.login-page {
+    background-color: var(--dark-bg);
+    color: var(--text-white);
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+}
+
+.logo-box {
+    width: 250px;
+    height: 60px;
+    background: white; /* To match the white rectangle in your frame */
+    margin: 0 auto 50px;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+/* Role Selector Accuracy */
+.role-selector {
+    margin-bottom: 40px;
+}
+
+.role-btn {
+    background: transparent;
+    border: 1px solid var(--accent-tan);
+    color: var(--text-white);
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* Input Group Precision */
+.input-group {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.input-icon-left {
+    padding-right: 15px;
+    border-right: 1px solid #334448;
+    color: var(--text-white);
+    font-size: 1.2rem;
+}
+
+.input-field {
+    flex: 1;
+    padding-left: 15px;
+}
+
+.input-field label {
+    display: block;
+    font-size: 0.85rem;
+    color: #88999C;
+    margin-bottom: 4px;
+}
+
+.input-field input {
+    background: transparent;
+    border: none;
+    color: var(--text-white);
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+}
+
+.input-icon-right {
+    color: var(--text-white);
+    font-size: 1.2rem;
+}
+
+/* Continue Button Accuracy */
+.btn-continue {
+    background-color: var(--accent-tan);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 50px;
+}
+
+/* Divider Line Accuracy */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--text-white);
+    font-size: 0.95rem;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #334448;
+}
+
+.divider:not(:empty)::before { margin-right: 15px; }
+.divider:not(:empty)::after { margin-left: 15px; }
+
+/* Social Icons Accuracy */
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-login img {
+    width: 28px;
+    height: 28px;
+}
+
+.apple-icon {
+    filter: invert(1); /* Makes the black Apple logo white for the dark theme */
+}

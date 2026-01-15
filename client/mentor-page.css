@@ -1,0 +1,344 @@
+:root {
+    --bg-dark: #081416;
+    --sidebar-bg: #f5f5e9;
+    --card-bg: #f5f5e9;
+    --footer-bg: #ececd6;
+    --accent-orange: #b87d4b;
+    --text-dark: #2c2c2c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #091c20;
+  color: #eef1dc;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* =========================
+   SCROLL ANIMATION
+========================= */
+section,
+footer {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* =========================
+   NAVBAR LAYOUT (RESTORED)
+========================= */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 60px;
+}
+
+.logo {
+  width: 120px;
+  height: 30px;
+  background: #cfc9c9;
+}
+
+.navbar nav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #eef1dc;
+  letter-spacing: 0.2px;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.25s ease;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 14px;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+.btn-outline {
+  border: 1px solid #cfcfcf;
+  background: #eef1dc;
+  padding: 8px 20px;
+  border-radius: 20px;
+}
+
+.btn-solid {
+  background: #091c20;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 0 15px rgba(238, 241, 220, 0.4);
+}
+/* Layout */
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    padding: 40px 5%;
+}
+
+/* Sidebar */
+.filter-group h3 {
+    color: var(--accent-orange);
+    margin-bottom: 10px;
+}
+
+/* Sidebar Filter Box Styling */
+.filter-box {
+    background: var(--sidebar-bg);
+    color: var(--text-dark);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Individual Label Row */
+.filter-box label {
+    display: flex;
+    align-items: center; /* Vertically centers checkbox with text */
+    justify-content: flex-start; /* Aligns everything to the left */
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Checkbox Normalization */
+.filter-box input[type="checkbox"] {
+    appearance: none; /* Removes default browser styling */
+    -webkit-appearance: none;
+    width: 16px;      /* Fixed uniform size */
+    height: 16px;     /* Fixed uniform size */
+    border: 1px solid #888;
+    border-radius: 3px;
+    margin-right: 12px; /* Consistent gap between box and text */
+    cursor: pointer;
+    position: relative;
+    background-color: #fff;
+    flex-shrink: 0;   /* Prevents the checkbox from squishing */
+}
+
+/* Checkmark effect when clicked */
+.filter-box input[type="checkbox"]:checked {
+    background-color: var(--accent-orange);
+    border-color: var(--accent-orange);
+}
+
+.filter-box input[type="checkbox"]:checked::after {
+    content: '✔';
+    position: absolute;
+    color: white;
+    font-size: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Count numbers (the 10, 34, 39 values) */
+.filter-box label span {
+    margin-left: auto; /* Pushes the count to the far right */
+    color: #666;
+    font-weight: 500;
+}
+
+/* Search input inside sidebar */
+.filter-box input[type="text"] {
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't break width */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+}
+/* Mentor Card */
+.mentor-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    color: var(--text-dark);
+    overflow: hidden;
+    margin-bottom: 30px;
+    font-family: mentorcruise;
+}
+
+.card-main {
+    display: flex;
+    padding: 25px;
+}
+
+.mentor-image {
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.mentor-info {
+    padding-left: 25px;
+}
+
+.mentor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quick-responder { font-size: 0.7rem; font-weight: bold; }
+
+.tags span {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    margin: 4px;
+}
+
+/* Card Bottom Bar */
+.card-footer {
+    background: #0d1f22;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.price { font-size: 2rem; font-weight: bold; }
+.price span { font-size: 1rem; color: #aaa; }
+
+.view-profile {
+    background: var(--accent-orange);
+    color: white;
+    border: none;
+    padding: 12px 60px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Footer */
+footer {
+    background: var(--footer-bg);
+    color: #444;
+    text-align: center;
+    padding: 50px;
+    margin-top: 50px;
+}
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  background-color: #eef1dc;
+  color: #000;
+  padding: 50px 40px;
+  outline: solid;
+  outline-offset: 40px;
+}
+
+.footer-logos {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 30px;
+  opacity: 0.80;
+  font-weight: 600;
+  color: #999;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 25px;
+  color: #000;
+}
+
+.footer-links a {
+  color: #000;
+}
+
+.footer-divider {
+  height: 1px;
+  background: #eef1dc;
+  margin: 26px 0;
+}
+
+.footer-programs {
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.9;
+  border-top: 2px solid blue;
+  border-bottom: 2px solid blue;
+  padding: 20px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  display: grid;
+}
+
+.footer-info {
+  margin-bottom: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.footer-info :nth-child(4) {
+  margin-top: 20px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 18px;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.footer-policy {
+  display: flex;
+  gap: 40px;
+  justify-content: flex-end;
+}
+
+.footer-policy a{
+  color: #000;
+}
+
+.footer a {
+  color: #000;
+}
