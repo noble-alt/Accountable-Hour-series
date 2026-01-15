@@ -3,12 +3,15 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const fs = require('fs').promises;
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../client')));
 
 const dbPath = path.join(__dirname, 'db.json');
+const JWT_SECRET = 'your-super-secret-key-that-should-be-in-an-env-file';
 
 async function getUsers() {
     try {
@@ -66,7 +69,85 @@ app.post('/login', async (req, res) => {
         return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    res.status(200).json({ message: 'Login successful' });
+    const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ message: 'Login successful', token });
+});
+
+app.post('/admin/login', (req, res) => {
+    const { username, password } = req.body;
+    if (username === 'admin' && password === 'password') {
+        const token = jwt.sign({ username: 'admin', role: 'admin' }, JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({ message: 'Login successful', token });
+    } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+    }
+});
+
+const authMiddleware = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        res.status(401).json({ message: 'Invalid token' });
+    }
+};
+
+app.get('/users', authMiddleware, async (req, res) => {
+    const db = await getUsers();
+    res.json(db.users || []);
+});
+
+app.get('/posts', authMiddleware, async (req, res) => {
+    const db = await getUsers();
+    res.json(db.posts || []);
+});
+
+app.post('/posts', authMiddleware, async (req, res) => {
+    const { title, content } = req.body;
+    if (!title || !content) {
+        return res.status(400).json({ message: 'Title and content are required' });
+    }
+    const db = await getUsers();
+    const newPost = { id: Date.now(), title, content, likes: 0, comments: [] };
+    db.posts = db.posts || [];
+    db.posts.push(newPost);
+    await saveUsers(db);
+    res.status(201).json(newPost);
+});
+
+app.post('/posts/:id/like', authMiddleware, async (req, res) => {
+    const db = await getUsers();
+    const post = db.posts.find(p => p.id === parseInt(req.params.id));
+    if (post) {
+        post.likes++;
+        await saveUsers(db);
+        res.json(post);
+    } else {
+        res.status(404).json({ message: 'Post not found' });
+    }
+});
+
+app.post('/posts/:id/comment', authMiddleware, async (req, res) => {
+    const { comment } = req.body;
+    if (!comment) {
+        return res.status(400).json({ message: 'Comment is required' });
+    }
+    const db = await getUsers();
+    const post = db.posts.find(p => p.id === parseInt(req.params.id));
+    if (post) {
+        post.comments.push(comment);
+        await saveUsers(db);
+        res.json(post);
+    } else {
+        res.status(404).json({ message: 'Post not found' });
+    }
 });
 
 const PORT = 3000;

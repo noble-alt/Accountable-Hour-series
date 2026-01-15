@@ -3,60 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Discussion Board</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="discussion-board.css">
 </head>
 <body>
-    <main class="container" style="display: flex; gap: 50px; padding: 50px 8%;">
-
-    <aside class="sidebar">
-        <h3 class="filter-title">Skills</h3>
-        <div class="filter-box">
-            <input type="text" class="search-input" placeholder="Search for skills">
-            <label class="filter-item">
-                <input type="checkbox"> Leadership <span class="count">10</span>
-            </label>
-            <label class="filter-item">
-                <input type="checkbox"> Career Growth <span class="count">34</span>
-            </label>
-            <label class="filter-item">
-                <input type="checkbox" checked> Accounting <span class="count">39</span>
-            </label>
-            <a href="#" style="color: var(--accent-orange); font-size: 0.8rem; text-decoration: none; font-weight: bold;">Show more</a>
+    <script src="discussion-board.js"></script>
+    <header class="navbar">
+        <div class="logo"> <a href="index.html"></a></div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="about-us.html">About Us</a>
+          <a href="mentor-page.html">Services</a>
+          <a href="event.html">Events</a>
+          <a href="gallary.html">Gallery</a>
+          <a href="discussion-board.html">Discussion Board</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="btn-outline"> <a href="sign-up.html">Log In</a> </button>
+          <button class="btn-solid"><a href="mentor-page.html">Meet Mentors</a></button>
         </div>
-    </aside>
+      </header>
 
-    <section class="mentors">
-        <div class="mentor-card">
-            <div class="card-content">
-                <img src="mentor1.jpg" class="mentor-img" alt="Shreville Awino">
-                <div class="mentor-details">
-                    <div style="display: flex; justify-content: space-between;">
-                        <h2>Shreville Awino</h2>
-                        <span style="font-size: 0.7rem; font-weight: bold;">⚡ Quick Responder</span>
-                    </div>
-                    <p>🎓 Senior Auditor at <strong>Spotify</strong></p>
-                    <p>🌐 Speaks <strong>English and Kiswahili</strong></p>
-                    <h4 style="margin: 15px 0 10px;">Global Project Manager Bridging Tech, Creativity & Cross-Cultural Collaboration</h4>
-                    <p style="font-size: 0.9rem; line-height: 1.5; color: #444;">Hi there! I'm a qualified auditor with a background in Financial accounting, where I focused a lot on book keeping, communication and collaboration.</p>
-
-                    <div class="tag-container">
-                        <span class="tag">Accounting</span>
-                        <span class="tag">Auditing</span>
-                        <span class="tag">Business Strategy</span>
-                        <span class="tag">Communication</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-price-bar">
-                <div class="price-box">
-                    <div style="font-size: 0.8rem; color: #aaa;">Starting from</div>
-                    <div class="amount">$100<span style="font-size: 1rem; font-weight: 400; color: #888;">/month</span></div>
-                </div>
-                <button class="btn-profile">View Profile</button>
-            </div>
+    <main class="container">
+        <h1>Discussion Board</h1>
+        <div class="post-container">
+            <!-- Posts will be dynamically inserted here -->
         </div>
-    </section>
-</main>
+        <div class="post-form">
+            <h2>Create a new post</h2>
+            <form id="new-post-form">
+                <input type="text" id="post-title" placeholder="Post title" required>
+                <textarea id="post-content" placeholder="Post content" required></textarea>
+                <button type="submit">Create Post</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

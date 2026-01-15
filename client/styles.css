@@ -48,7 +48,11 @@ footer {
   justify-content: space-between;
   padding: 22px 60px;
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
-  position: static;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #091c20; /* Add a background color to prevent content from showing through */
 }
 
 .logo {
@@ -77,6 +81,7 @@ footer {
     align-items: center;
     gap: 100px;
 }
+
 .btn-outline {
   border: 1px solid #cfcfcf;
   background: #eef1dc;
@@ -99,10 +104,36 @@ footer {
   position: relative;
   padding: 120px 20px;
   text-align: center;
-  background: 
-    linear-gradient(rgba(9, 28, 32, 1),rgba(9, 28, 32, 1)),
-    url("hero-bg.jpg") center / cover no-repeat;
   color: #eef1dc;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  filter: brightness(0.5);
+}
+
+/* YouTube long video format aspect ratio */
+@media (min-aspect-ratio: 16/9) {
+  .hero-video {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .hero-video {
+    width: auto;
+    height: 100%;
+  }
 }
 
 .hero h1 {
@@ -497,6 +528,45 @@ button:hover {
 /* Solid button hover */
 .btn-solid:hover {
   background: #000;
+}
+
+/* Loader animation */
+.loader {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 6px solid #b4793d;
+    border-right-color: transparent;
+    border-radius: 50%;
+    z-index: 9999;
+    animation: spin 1s linear infinite;
+}
+
+.loader::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 60px;
+    height: 60px;
+    border: 6px solid transparent;
+    border-right-color: #b4793d;
+    border-radius: 50%;
+    animation: spin-hand 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spin-hand {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Outline & Join button hover */
