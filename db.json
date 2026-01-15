@@ -25,5 +25,6 @@
       "email": "test4@example.com",
       "password": "$2b$10$Xy/Lpc3HxJNzbF.GFtIiheKXgwK5PtvF0D6RRovypO6Uxk4sKlMIC"
     }
-  ]
+  ],
+  "posts": []
 }
