@@ -61,6 +61,36 @@ h1 {
     color: #778da9;
 }
 
+.toggle-message a {
+    color: #b4793d;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.toggle-message a:hover {
+    text-decoration: underline;
+}
+
+.back-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.back-home a {
+    color: #e0e1dd;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+}
+
+.back-home a:hover {
+    color: #b4793d;
+}
+
 .input-group {
     position: relative;
     margin-bottom: 25px;
