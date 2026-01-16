@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok) {
             const data = await response.json();
             token = data.token;
-            localStorage.setItem('adminToken', token);
+            localStorage.setItem('token', token);
             adminLogin.style.display = "none";
             adminDashboard.style.display = "block";
             fetchStats();
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const fetchStats = async () => {
         if (!token) {
-            token = localStorage.getItem('adminToken');
+            token = localStorage.getItem('token');
         }
         if (!token) {
             console.error('No token found');
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const fetchUsers = async () => {
         if (!token) {
-            token = localStorage.getItem('adminToken');
+            token = localStorage.getItem('token');
         }
         if (!token) {
             console.error('No token found');

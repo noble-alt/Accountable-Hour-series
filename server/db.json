@@ -1,5 +1,31 @@
 {
-  "users": [],
+  "users": [
+    {
+      "fullname": "New User",
+      "email": "newuser@example.com",
+      "password": "$2b$10$Og4onN1HgckoReHJIDEl2.0FoEbjOFEyMStPSg2IZJRitaCz0kObi"
+    },
+    {
+      "fullname": "abdulazeez idris",
+      "email": "abdulazeez040@gmail.com",
+      "password": "$2b$10$EweW2QF4aH2Nv3pj/7xQpO6/uD3LRezeMavW8ulG.OkkuLctBtD12"
+    },
+    {
+      "fullname": "Test User",
+      "email": "test@example.com",
+      "password": "$2b$10$UHgUGiABYJp6v4xQJUwTeutpTmx1v85LODQOO87nDoaNTOVKT8/.a"
+    },
+    {
+      "fullname": "Test User 3",
+      "email": "test3@example.com",
+      "password": "$2b$10$5T.ydmLZZ08ZTIiR3cYmPOaaHHfCTAigYFR8SJX5WsnhAT7fd48Ta"
+    },
+    {
+      "fullname": "Test User 4",
+      "email": "test4@example.com",
+      "password": "$2b$10$Xy/Lpc3HxJNzbF.GFtIiheKXgwK5PtvF0D6RRovypO6Uxk4sKlMIC"
+    }
+  ],
   "posts": [
     {
       "id": 1768445343738,
