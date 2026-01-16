@@ -32,12 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Login/Logout Toggle Logic
-    const loginLinks = document.querySelectorAll('.btn-outline a');
     const token = localStorage.getItem('token');
+    // Select all links in the navbar
+    const navLinks = document.querySelectorAll('.navbar a, .nav-links a, .nav-actions a');
 
-    loginLinks.forEach(link => {
+    navLinks.forEach(link => {
         const text = link.textContent.trim().toLowerCase();
-        if (text === 'log in' || link.href.includes('sign-up.html') || link.href.includes('sign-in.html')) {
+        // Specifically target "Log In" or "Log Out" links
+        if (text === 'log in' || text === 'log out') {
             if (token) {
                 link.textContent = 'Log Out';
                 link.href = '#';
@@ -47,10 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = 'index.html';
                 });
             } else {
-                // Point to the signin tab if the text says "Log In"
-                if (text === 'log in') {
-                    link.href = 'sign-up.html#signin';
-                }
+                link.textContent = 'Log In';
+                link.href = 'sign-up.html#signin';
             }
         }
     });

@@ -5,20 +5,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullnameGroup = document.getElementById('fullname-group');
     const fullnameInput = fullnameGroup.querySelector('input');
     const form = document.getElementById('login-form');
+    const submitBtn = form.querySelector('button[type="submit"]');
 
     const updateUI = (mode) => {
+        const title = document.querySelector('.login-box h1');
         if (mode === 'signup') {
+            title.textContent = 'Create Account';
             signupBtn.classList.add('active');
             signinBtn.classList.remove('active');
             toggleMessage.innerHTML = 'Already have an account? <a href="#signin">Sign in!</a>';
             fullnameGroup.style.display = 'block';
             fullnameInput.required = true;
+            submitBtn.textContent = 'Continue';
         } else {
+            title.textContent = 'Welcome Back';
             signinBtn.classList.add('active');
             signupBtn.classList.remove('active');
             toggleMessage.innerHTML = 'No Account? <a href="#signup">Sign up!!</a>';
             fullnameGroup.style.display = 'none';
             fullnameInput.required = false;
+            submitBtn.textContent = 'Log In';
         }
     };
 

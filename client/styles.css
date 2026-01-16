@@ -82,15 +82,18 @@ footer {
 }
 
 .btn-outline {
+  display: inline-block;
   border: 1px solid #cfcfcf;
   background: #eef1dc;
   padding: 8px 20px;
   border-radius: 20px;
+  color: #091c20 !important;
 }
 
 .btn-solid {
+  display: inline-block;
   background: #091c20;
-  color: #fff;
+  color: #fff !important;
   padding: 8px 20px;
   border-radius: 20px;
   border: none;
