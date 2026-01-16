@@ -24,6 +24,11 @@
       "fullname": "Test User 4",
       "email": "test4@example.com",
       "password": "$2b$10$Xy/Lpc3HxJNzbF.GFtIiheKXgwK5PtvF0D6RRovypO6Uxk4sKlMIC"
+    },
+    {
+      "fullname": "Verify User",
+      "email": "user_9274@example.com",
+      "password": "$2b$10$IqD5ortc4B5N8R3Ut792iOlC.4Q7mB984fQsyqxmcjNQKNUGbkJEG"
     }
   ],
   "posts": [
