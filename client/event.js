@@ -2,29 +2,65 @@ document.addEventListener("DOMContentLoaded", function() {
     const monthYearElement = document.querySelector(".cal-nav span");
     const calendarGrid = document.querySelector(".cal-grid");
 
-    // Hardcode the "current" date to match the static event data.
-    // This makes the component predictable for demonstration and testing.
-    const today = new Date(2025, 11, 19); // Use a date within the "upcoming" month.
-    let currentMonth = 11; // December (0-indexed)
-    let currentYear = 2025;
+    // Use the actual current date for the calendar.
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
 
-    // We'll simulate some data for the current and previous month.
-    const prevMonth = 10; // November
-    const prevMonthYear = 2025;
+    // Calculate previous month and its year
+    let prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    let prevMonthYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     const eventsByMonth = {
         // Key is "YYYY-M"
         [`${currentYear}-${currentMonth}`]: [
-            { day: 19, month: "Dec", title: "2025 National Tax and Audit Summit", desc: "Join industries leader for 2 days intensive", fullDate: "Dec 25 - 26", location: "Lagos island", cost: "Paid", host: "Led by Mr Kehinde - President, ICAN" },
-            { day: 26, month: "Dec", title: "End of Year Tech Meetup", desc: "Networking and drinks for tech professionals.", fullDate: "Dec 26", location: "Virtual", cost: "Free", host: "Led by Tech Community" }
+            {
+                day: today.getDate() > 15 ? 25 : 15,
+                month: monthAbbr[currentMonth],
+                title: `${currentYear} National Tax and Audit Summit`,
+                desc: "Join industry leaders for 2 days intensive session",
+                fullDate: `${monthAbbr[currentMonth]} 25 - 26`,
+                location: "Lagos Island",
+                cost: "Paid",
+                host: "Led by Mr Kehinde - President, ICAN"
+            },
+            {
+                day: today.getDate() > 20 ? 28 : 22,
+                month: monthAbbr[currentMonth],
+                title: "Tech Networking Meetup",
+                desc: "Networking and knowledge sharing for professionals.",
+                fullDate: `${monthAbbr[currentMonth]} 26`,
+                location: "Virtual",
+                cost: "Free",
+                host: "Led by Accountable Futures Community"
+            }
         ],
         [`${prevMonthYear}-${prevMonth}`]: [
-            { day: 15, month: "Nov", title: "November Blockchain Conference", desc: "Exploring the future of decentralized tech", fullDate: "Nov 15 - 16", location: "Virtual", cost: "Free", host: "Led by Blockchain Innovators" },
-            { day: 22, month: "Nov", title: "Agile Project Management Workshop", desc: "A deep dive into agile methodologies.", fullDate: "Nov 22", location: "Online", cost: "Paid", host: "Led by Agile Masters Inc." }
+            {
+                day: 15,
+                month: monthAbbr[prevMonth],
+                title: "Previous Month Industry Conference",
+                desc: "Reviewing key developments in the field",
+                fullDate: `${monthAbbr[prevMonth]} 15 - 16`,
+                location: "Virtual",
+                cost: "Free",
+                host: "Led by Industry Experts"
+            },
+            {
+                day: 22,
+                month: monthAbbr[prevMonth],
+                title: "Professional Skills Workshop",
+                desc: "Practical session on essential career skills.",
+                fullDate: `${monthAbbr[prevMonth]} 22`,
+                location: "Online",
+                cost: "Paid",
+                host: "Led by Mentors Team"
+            }
         ]
     };
-
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     function renderCalendar(month, year) {
         // Clear existing calendar days, but keep the day headers
