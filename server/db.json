@@ -39,6 +39,16 @@
       "fullname": "Test User",
       "email": "test@test.com",
       "password": "$2b$10$mWROuEpb/mxpJzNtcOAyfep2riDdmQK0CSG/VSELxvPsyO5/7/F.W"
+    },
+    {
+      "fullname": "Test Again",
+      "email": "testagain@example.com",
+      "password": "$2b$10$A9YOacrj5pl5wKjeezBn6eghMoAytbqr3cFavwiGwMPXul/Tm0M4K"
+    },
+    {
+      "fullname": "Final Test",
+      "email": "final_1768583000@example.com",
+      "password": "$2b$10$OmvwkjBbwtRSk0gBJJFzvuPHFnyvQgUDDFMKOqDvgwc8ymtjglNO."
     }
   ],
   "posts": [
