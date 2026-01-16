@@ -92,7 +92,7 @@ footer {
 
 .btn-solid {
   display: inline-block;
-  background: #091c20;
+  background: #b4793d;
   color: #fff !important;
   padding: 8px 20px;
   border-radius: 20px;
@@ -104,7 +104,7 @@ footer {
 ========================= */
 .hero {
   position: relative;
-  padding: 120px 20px;
+  padding: 220px 20px;
   text-align: center;
   color: #eef1dc;
   overflow: hidden;
@@ -160,6 +160,9 @@ footer {
 
 .hero button{
   background-color: #b4793d;
+}
+.hero button:hover{
+  background-color: #fff;
 }
 
 /* =========================

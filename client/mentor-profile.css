@@ -31,7 +31,7 @@ body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg-light);
 .navbar nav a {
   font-size: 14px;
   font-weight: 500;
-  color: #eef1dc;
+  color: black;
   letter-spacing: 0.2px;
   position: relative;
   padding-bottom: 4px;
@@ -47,23 +47,9 @@ body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg-light);
     display: flex;
     align-items: center;
     gap: 100px;
+    color: black;
 }
 
-.btn-outline {
-  border: 1px solid #cfcfcf;
-  background: #eef1dc;
-  padding: 8px 20px;
-  border-radius: 20px;
-}
-
-.btn-solid {
-  background: #091c20;
-  color: #fff;
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: none;
-  box-shadow: 0 0 15px rgba(238, 241, 220, 0.4);
-}
 /* Dark Header Section */
 .profile-top-dark { background: var(--primary-dark); color: white; padding: 40px 0 100px; }
 .breadcrumb { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 40px; }
