@@ -29,6 +29,16 @@
       "fullname": "Verify User",
       "email": "user_9274@example.com",
       "password": "$2b$10$IqD5ortc4B5N8R3Ut792iOlC.4Q7mB984fQsyqxmcjNQKNUGbkJEG"
+    },
+    {
+      "fullname": "New Test",
+      "email": "newtest@example.com",
+      "password": "$2b$10$mgu9eV4dAR/qXC1aCQQ6TeRqUAk/nw0DXaJiipwjnD1rq3BgWTuaS"
+    },
+    {
+      "fullname": "Test User",
+      "email": "test@test.com",
+      "password": "$2b$10$mWROuEpb/mxpJzNtcOAyfep2riDdmQK0CSG/VSELxvPsyO5/7/F.W"
     }
   ],
   "posts": [
