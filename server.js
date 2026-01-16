@@ -1,95 +1,178 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const fs = require('fs').promises;
+const path = require('path');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(cors());
-const PORT = 3000;
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client')));
 
-// Serve static files from the root directory
-app.use(express.static('.'));
+const dbPath = path.join(__dirname, 'db.json');
+const JWT_SECRET = 'your-super-secret-key-that-should-be-in-an-env-file';
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.post('/signup', (req, res) => {
-    const { fullName, email, password } = req.body;
-
-    fs.readFile('db.json', 'utf8', (err, data) => {
-        if (err && err.code !== 'ENOENT') { // Ignore file not found, but handle other errors
-            return res.status(500).json({ message: 'Error reading from database' });
+async function getUsers() {
+    try {
+        const data = await fs.readFile(dbPath, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            return { users: [], posts: [] };
         }
+        throw error;
+    }
+}
 
-        let db;
-        try {
-            // If the file is empty or doesn't exist, start with an empty user list
-            db = data ? JSON.parse(data) : { users: [] };
-        } catch (parseErr) {
-            return res.status(500).json({ message: 'Error parsing database data.' });
-        }
+async function saveUsers(users) {
+    await fs.writeFile(dbPath, JSON.stringify(users, null, 2), 'utf8');
+}
 
-        const userExists = db.users.some(user => user.email === email);
+app.post('/signup', async (req, res) => {
+    const { fullname, email, password } = req.body;
 
-        if (userExists) {
-            return res.status(400).json({ message: 'User already exists' });
-        }
+    if (!fullname || !email || !password) {
+        return res.status(400).json({ message: 'Fullname, email and password are required' });
+    }
 
-        bcrypt.hash(password, saltRounds, (err, hash) => {
-            if (err) {
-                return res.status(500).json({ message: 'Error hashing password' });
-            }
+    const db = await getUsers();
+    db.users = db.users || [];
 
-            db.users.push({ fullName, email, password: hash });
+    const existingUser = db.users.find(user => user.email === email);
+    if (existingUser) {
+        return res.status(409).json({ message: 'Email already exists' });
+    }
 
-            fs.writeFile('db.json', JSON.stringify(db, null, 2), (err) => {
-                if (err) {
-                    return res.status(500).json({ message: 'Error writing to database' });
-                }
-                res.status(201).json({ message: 'User created successfully' });
-            });
-        });
-    });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    db.users.push({ fullname, email, password: hashedPassword });
+    await saveUsers(db);
+
+    res.status(201).json({ message: 'User created successfully' });
 });
 
-app.post('/signin', (req, res) => {
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password are required' });
+    }
+
+    const db = await getUsers();
+    const user = db.users.find(user => user.email === email);
+
+    if (!user) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ message: 'Login successful', token });
+});
+
+app.post('/admin/login', (req, res) => {
     const { username, password } = req.body;
-
-    fs.readFile('db.json', 'utf8', (err, data) => {
-        if (err && err.code !== 'ENOENT') {
-            return res.status(500).json({ message: 'Error reading from database' });
-        }
-
-        if (err && err.code === 'ENOENT') {
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
-
-        let db;
-        try {
-            db = JSON.parse(data);
-        } catch (parseErr) {
-            return res.status(500).json({ message: 'Error parsing database data.' });
-        }
-
-        const user = db.users.find(user => user.email === username);
-
-        if (user) {
-            bcrypt.compare(password, user.password, (err, result) => {
-                if (result) {
-                    res.status(200).json({ message: 'Sign-in successful' });
-                } else {
-                    res.status(401).json({ message: 'Invalid credentials' });
-                }
-            });
-        } else {
-            res.status(401).json({ message: 'Invalid credentials' });
-        }
-    });
+    if (username === 'admin' && password === 'password') {
+        const token = jwt.sign({ username: 'admin', role: 'admin' }, JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({ message: 'Login successful', token });
+    } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+    }
 });
 
+const authMiddleware = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
 
+    const token = authHeader.split(' ')[1];
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        res.status(401).json({ message: 'Invalid token' });
+    }
+};
+
+const adminMiddleware = (req, res, next) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ message: 'Forbidden' });
+    }
+    next();
+};
+
+app.get('/users', authMiddleware, adminMiddleware, async (req, res) => {
+    const db = await getUsers();
+    res.json(db.users || []);
+});
+
+app.delete('/users/:email', authMiddleware, adminMiddleware, async (req, res) => {
+    const { email } = req.params;
+    const db = await getUsers();
+    const userIndex = db.users.findIndex(user => user.email === email);
+
+    if (userIndex === -1) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    db.users.splice(userIndex, 1);
+    await saveUsers(db);
+    res.status(200).json({ message: 'User deleted successfully' });
+});
+
+app.get('/posts', authMiddleware, async (req, res) => {
+    const db = await getUsers();
+    res.json(db.posts || []);
+});
+
+app.post('/posts', authMiddleware, async (req, res) => {
+    const { title, content } = req.body;
+    if (!title || !content) {
+        return res.status(400).json({ message: 'Title and content are required' });
+    }
+    const db = await getUsers();
+    const newPost = { id: Date.now(), title, content, likes: 0, comments: [] };
+    db.posts = db.posts || [];
+    db.posts.push(newPost);
+    await saveUsers(db);
+    res.status(201).json(newPost);
+});
+
+app.post('/posts/:id/like', authMiddleware, async (req, res) => {
+    const db = await getUsers();
+    const post = db.posts.find(p => p.id === parseInt(req.params.id));
+    if (post) {
+        post.likes++;
+        await saveUsers(db);
+        res.json(post);
+    } else {
+        res.status(404).json({ message: 'Post not found' });
+    }
+});
+
+app.post('/posts/:id/comment', authMiddleware, async (req, res) => {
+    const { comment } = req.body;
+    if (!comment) {
+        return res.status(400).json({ message: 'Comment is required' });
+    }
+    const db = await getUsers();
+    const post = db.posts.find(p => p.id === parseInt(req.params.id));
+    if (post) {
+        post.comments.push(comment);
+        await saveUsers(db);
+        res.json(post);
+    } else {
+        res.status(404).json({ message: 'Post not found' });
+    }
+});
+
+const PORT = 3000;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

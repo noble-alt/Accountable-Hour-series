@@ -24,7 +24,35 @@
       "fullName": "Test User 4",
       "email": "test4@example.com",
       "password": "$2b$10$Xy/Lpc3HxJNzbF.GFtIiheKXgwK5PtvF0D6RRovypO6Uxk4sKlMIC"
+    },
+    {
+      "fullname": "Final Test User",
+      "email": "user_1768568469@example.com",
+      "password": "$2b$10$uZBkZpmxxA6GE3WDZdJS5.7J/MYUdI.MJ9ey98BKqUyEjhIqPxlem"
+    },
+    {
+      "fullname": "Final Test User",
+      "email": "user_1768568882@example.com",
+      "password": "$2b$10$rGa2oh6Qlsig9af9wc2vROU7nGKLyq8Iw5SGy398S5VqjYwf8p.lu"
+    },
+    {
+      "fullname": "Final Test User",
+      "email": "user_1768569284@example.com",
+      "password": "$2b$10$uIQhrBnzMU.DiXCMUOLPx.o.71bQ40lXNfbMYpYGq6pJ1QfTQNLnC"
+    },
+    {
+      "fullname": "Final Test User",
+      "email": "user_1768570063@example.com",
+      "password": "$2b$10$lUfmneVp2unRcf7no7etp.DCQ.UTB/J5KOmxhGo1VtcjW0cIJK3r."
     }
   ],
-  "posts": []
+  "posts": [
+    {
+      "id": 1768570064682,
+      "title": "Final Post 1768570064",
+      "content": "Final test content",
+      "likes": 0,
+      "comments": []
+    }
+  ]
 }

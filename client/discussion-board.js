@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const postContainer = document.querySelector(".post-container");
     const newPostForm = document.getElementById("new-post-form");
-    let token = localStorage.getItem('adminToken');
+    let token = localStorage.getItem('token');
 
     const fetchPosts = async () => {
         if (!token) {
