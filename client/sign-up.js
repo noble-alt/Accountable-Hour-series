@@ -51,11 +51,27 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUI(mode);
     });
 
-    // Redirect if already logged in
-    if (localStorage.getItem('token')) {
-        window.location.href = 'index.html';
-        return;
-    }
+    // Handle already logged in state
+    const checkLoginStatus = () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            showError('You are currently logged in. To use a different account, please log out.');
+            const logoutLink = document.createElement('a');
+            logoutLink.href = '#';
+            logoutLink.textContent = ' Log Out Now';
+            logoutLink.style.color = '#b4793d';
+            logoutLink.style.fontWeight = 'bold';
+            logoutLink.style.textDecoration = 'underline';
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                location.reload();
+            });
+            errorMessage.appendChild(logoutLink);
+        }
+    };
+
+    checkLoginStatus();
 
     // Initialize UI based on hash
     const initialMode = window.location.hash === '#signin' ? 'signin' : 'signup';
@@ -67,12 +83,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSignUp = window.location.hash !== '#signin';
         const endpoint = isSignUp ? '/signup' : '/login';
 
-        // More compatible form data extraction with trimming
+        console.log(`Form submitted for ${isSignUp ? 'signup' : 'login'} at ${endpoint}`);
+
+        // More robust form data extraction
         const data = {};
-        const formData = new FormData(form);
-        for (let [key, value] of formData.entries()) {
-            data[key] = typeof value === 'string' ? value.trim() : value;
-        }
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => {
+            if (input.name) {
+                data[input.name] = input.value.trim();
+            }
+        });
 
         if (!isSignUp) {
             delete data.fullname;
@@ -86,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
 
         try {
+            console.log('Sending data:', { ...data, password: '***' });
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
@@ -93,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify(data),
             });
+            console.log('Response status:', response.status);
 
             let result;
             const contentType = response.headers.get("content-type");
