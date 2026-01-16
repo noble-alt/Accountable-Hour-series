@@ -1,11 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     const postContainer = document.querySelector(".post-container");
+    const newPostFormContainer = document.querySelector(".post-form");
     const newPostForm = document.getElementById("new-post-form");
     let token = localStorage.getItem('token');
 
     const fetchPosts = async () => {
         if (!token) {
-            console.error('No token found');
+            postContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px; background: #1b263b; border-radius: 12px; margin-top: 20px;">
+                    <h2>Authentication Required</h2>
+                    <p>Please <a href="sign-up.html#signin" style="color: #b4793d; font-weight: bold;">log in</a> to view and join the discussions.</p>
+                </div>
+            `;
+            if (newPostFormContainer) newPostFormContainer.style.display = 'none';
             return;
         }
         const response = await fetch("/posts", {

@@ -30,7 +30,8 @@ async function saveUsers(users) {
 }
 
 app.post('/signup', async (req, res) => {
-    const { fullname, email, password } = req.body;
+    let { fullname, email, password } = req.body;
+    if (email) email = email.toLowerCase();
     console.log(`Signup attempt for: ${email}`);
 
     if (!fullname || !email || !password) {
@@ -39,8 +40,9 @@ app.post('/signup', async (req, res) => {
     }
 
     const db = await getUsers();
+    db.users = db.users || [];
 
-    const existingUser = db.users.find(user => user.email === email);
+    const existingUser = db.users.find(user => user.email.toLowerCase() === email);
     if (existingUser) {
         console.log(`Signup failed: User already exists ${email}`);
         return res.status(409).json({ message: 'Email already exists' });
@@ -56,7 +58,8 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    if (email) email = email.toLowerCase();
     console.log(`Login attempt for: ${email}`);
 
     if (!email || !password) {
@@ -64,7 +67,8 @@ app.post('/login', async (req, res) => {
     }
 
     const db = await getUsers();
-    const user = db.users.find(user => user.email === email);
+    db.users = db.users || [];
+    const user = db.users.find(user => user.email.toLowerCase() === email);
 
     if (!user) {
         console.log(`User not found: ${email}`);

@@ -54,4 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    if (token) {
+        // Update Hero/Action buttons to redirect to Discussion Board if they point to signup
+        const actionButtons = document.querySelectorAll('.hero a, .hero-text a, .join-section a, .join-card a, .btn-solid');
+        actionButtons.forEach(btn => {
+            const link = btn.tagName === 'A' ? btn : btn.querySelector('a');
+            if (link && (link.getAttribute('href') === 'sign-up.html' || link.getAttribute('href') === 'sign-up.html#signup')) {
+                link.textContent = 'Join Discussion';
+                link.href = 'discussion-board.html';
+            }
+        });
+    }
 });

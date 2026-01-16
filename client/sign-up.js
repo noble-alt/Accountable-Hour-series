@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullnameInput = fullnameGroup.querySelector('input');
     const form = document.getElementById('login-form');
     const submitBtn = form.querySelector('button[type="submit"]');
+    const errorMessage = document.getElementById('error-message');
+
+    const showError = (msg) => {
+        errorMessage.textContent = msg;
+        errorMessage.style.display = 'block';
+    };
+
+    const hideError = () => {
+        errorMessage.style.display = 'none';
+    };
 
     const updateUI = (mode) => {
         const title = document.querySelector('.login-box h1');
@@ -47,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        hideError();
         const isSignUp = window.location.hash !== '#signin';
         const endpoint = isSignUp ? '/signup' : '/login';
 
@@ -57,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
             delete data.fullname;
         }
 
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Processing...';
+        submitBtn.disabled = true;
+
         try {
             const response = await fetch(endpoint, {
                 method: 'POST',
@@ -66,20 +81,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(data),
             });
 
-            const result = await response.json();
+            let result;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                result = await response.json();
+            } else {
+                result = { message: await response.text() };
+            }
 
             if (response.ok) {
                 if (result.token) {
                     localStorage.setItem('token', result.token);
                 }
+                // We'll still use alert for success as it's a critical confirmation before redirect
                 alert(result.message || 'Success!');
                 window.location.href = 'index.html';
             } else {
-                alert(result.message || 'An error occurred');
+                showError(result.message || 'An error occurred during ' + (isSignUp ? 'signup' : 'login'));
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Check console for details.');
+            showError('Network error or server is down. Please try again later.');
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
         }
+    });
+
+    const socialIcons = document.querySelectorAll('.social-login i');
+    socialIcons.forEach(icon => {
+        icon.addEventListener('click', () => {
+            showError('Social login is not yet implemented. Please use the form.');
+        });
     });
 });
