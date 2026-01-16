@@ -1,159 +1,158 @@
-/* Precise Dark Theme Variables */
-:root {
-    --dark-bg: #0A191E;      /* The deep dark teal/black background */
-    --text-white: #FFFFFF;
-    --accent-tan: #B68347;   /* The warm ochre from the button */
-    --border-muted: #2A3C3F; /* Subtle border for roles */
-    --input-border: #4A3B2A; /* The specific tan border on input */
-    --input-bg: #11252B;     /* Slightly lighter than background */
-}
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
 
-* {
-    box-sizing: border-box;
+body {
     margin: 0;
     padding: 0;
-}
-
-body.login-page {
-    background-color: var(--dark-bg);
-    color: var(--text-white);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #091c20;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #e0e1dd;
 }
 
 .login-container {
     text-align: center;
-    width: 100%;
-    max-width: 450px;
-    padding: 20px;
 }
 
-.logo-box {
-    width: 250px;
-    height: 60px;
-    background: white; /* To match the white rectangle in your frame */
-    margin: 0 auto 50px;
+.login-box {
+    background-color: #0d1b2a;
+    padding: 40px;
+    border-radius: 10px;
+    width: 400px;
 }
 
 h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: 2.2rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-}
-
-/* Role Selector Accuracy */
-.role-selector {
-    margin-bottom: 40px;
-}
-
-.role-btn {
-    background: transparent;
-    border: 1px solid var(--accent-tan);
-    color: var(--text-white);
-    padding: 12px 40px;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-/* Input Group Precision */
-.input-group {
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
+    font-size: 48px;
+    font-weight: 800;
     margin-bottom: 25px;
-    text-align: left;
 }
 
-.input-icon-left {
-    padding-right: 15px;
-    border-right: 1px solid #334448;
-    color: var(--text-white);
-    font-size: 1.2rem;
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    background-color: #1b263b;
+    border-radius: 10px;
+    padding: 5px;
 }
 
-.input-field {
-    flex: 1;
-    padding-left: 15px;
-}
-
-.input-field label {
-    display: block;
-    font-size: 0.85rem;
-    color: #88999C;
-    margin-bottom: 4px;
-}
-
-.input-field input {
-    background: transparent;
+.toggle-buttons button {
+    background-color: transparent;
     border: none;
-    color: var(--text-white);
-    font-size: 1rem;
+    color: #e0e1dd;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    width: 50%;
+    transition: background-color 0.3s;
+}
+
+.toggle-buttons button.active {
+    background-color: #4a5568;
+}
+
+.toggle-message {
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: #778da9;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #778da9;
+}
+
+.input-group .fa-check-circle {
+    left: auto;
+    right: 20px;
+    color: #6a994e;
+}
+
+.input-group input {
     width: 100%;
-    outline: none;
+    padding: 18px 50px;
+    box-sizing: border-box;
+    border: 1px solid #415a77;
+    border-radius: 12px;
+    background-color: #1b263b;
+    color: #e0e1dd;
+    font-size: 14px;
 }
 
-.input-icon-right {
-    color: var(--text-white);
-    font-size: 1.2rem;
+.input-group input::placeholder {
+    color: #778da9;
 }
 
-/* Continue Button Accuracy */
-.btn-continue {
-    background-color: var(--accent-tan);
-    color: white;
-    border: none;
+.continue-btn {
     width: 100%;
     padding: 18px;
+    border: none;
     border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    background-color: #b4793d;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
+    transition: background-color 0.3s;
 }
 
-/* Divider Line Accuracy */
-.divider {
+.continue-btn:hover {
+    background-color: #a0682a;
+}
+
+.or-divider {
     display: flex;
     align-items: center;
     text-align: center;
-    margin-bottom: 40px;
-    color: var(--text-white);
-    font-size: 0.95rem;
+    color: #778da9;
+    margin: 25px 0;
 }
 
-.divider::before, .divider::after {
+.or-divider::before,
+.or-divider::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid #334448;
+    border-bottom: 1px solid #415a77;
 }
 
-.divider:not(:empty)::before { margin-right: 15px; }
-.divider:not(:empty)::after { margin-left: 15px; }
+.or-divider span {
+    padding: 0 15px;
+}
 
-/* Social Icons Accuracy */
 .social-login {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 25px;
 }
 
-.social-login img {
-    width: 28px;
-    height: 28px;
+.social-login i {
+    font-size: 20px;
+    cursor: pointer;
+    color: #e0e1dd;
+    background-color: #1b263b;
+    padding: 12px;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
 }
 
-.apple-icon {
-    filter: invert(1); /* Makes the black Apple logo white for the dark theme */
+.social-login i:hover {
+    background-color: #4a5568;
 }

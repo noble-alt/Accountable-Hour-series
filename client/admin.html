@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="sign-up.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <header class="navbar">
@@ -31,6 +31,20 @@
             <div id="stats">
                 <p>Total Users: <span id="total-users"></span></p>
                 <p>Total Posts: <span id="total-posts"></span></p>
+            </div>
+            <div id="user-management">
+                <h2>User Management</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
