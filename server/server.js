@@ -44,10 +44,12 @@ app.post('/signup', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    db.users.push({ fullname, email, password: hashedPassword });
+    const newUser = { fullname, email, password: hashedPassword };
+    db.users.push(newUser);
     await saveUsers(db);
 
-    res.status(201).json({ message: 'User created successfully' });
+    const token = jwt.sign({ email: newUser.email }, JWT_SECRET, { expiresIn: '1h' });
+    res.status(201).json({ message: 'User created successfully', token });
 });
 
 app.post('/login', async (req, res) => {
