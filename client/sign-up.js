@@ -3,37 +3,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const signinBtn = document.getElementById('signin-btn');
     const toggleMessage = document.querySelector('.toggle-message');
     const fullnameGroup = document.getElementById('fullname-group');
+    const fullnameInput = fullnameGroup.querySelector('input');
     const form = document.getElementById('login-form');
 
     const updateUI = (mode) => {
         if (mode === 'signup') {
             signupBtn.classList.add('active');
             signinBtn.classList.remove('active');
-            toggleMessage.textContent = 'Already have an account? Sign in!';
+            toggleMessage.innerHTML = 'Already have an account? <a href="#signin">Sign in!</a>';
             fullnameGroup.style.display = 'block';
-            window.location.hash = 'signup';
+            fullnameInput.required = true;
         } else {
             signinBtn.classList.add('active');
             signupBtn.classList.remove('active');
-            toggleMessage.textContent = 'No Account, Sign up!!';
+            toggleMessage.innerHTML = 'No Account? <a href="#signup">Sign up!!</a>';
             fullnameGroup.style.display = 'none';
-            window.location.hash = 'signin';
+            fullnameInput.required = false;
         }
     };
 
-    signupBtn.addEventListener('click', () => updateUI('signup'));
-    signinBtn.addEventListener('click', () => updateUI('signin'));
+    signupBtn.addEventListener('click', () => {
+        window.location.hash = 'signup';
+    });
+
+    signinBtn.addEventListener('click', () => {
+        window.location.hash = 'signin';
+    });
+
+    window.addEventListener('hashchange', () => {
+        const mode = window.location.hash === '#signin' ? 'signin' : 'signup';
+        updateUI(mode);
+    });
 
     // Initialize UI based on hash
-    if (window.location.hash === '#signin') {
-        updateUI('signin');
-    } else {
-        updateUI('signup');
-    }
+    const initialMode = window.location.hash === '#signin' ? 'signin' : 'signup';
+    updateUI(initialMode);
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const isSignUp = signupBtn.classList.contains('active');
+        const isSignUp = window.location.hash !== '#signin';
         const endpoint = isSignUp ? '/signup' : '/login';
 
         const formData = new FormData(form);
