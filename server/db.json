@@ -49,6 +49,21 @@
       "fullname": "Final Test",
       "email": "final_1768583000@example.com",
       "password": "$2b$10$OmvwkjBbwtRSk0gBJJFzvuPHFnyvQgUDDFMKOqDvgwc8ymtjglNO."
+    },
+    {
+      "fullname": "Jules Test",
+      "email": "jules@example.com",
+      "password": "$2b$10$qceHB8mQmM1UCe3rc8ek/.XblY/K0MgSzJnirg1/pec2DqXuJA2p2"
+    },
+    {
+      "fullname": "Trim Test",
+      "email": "trimtest@example.com",
+      "password": "$2b$10$085mTbu4MtSCk6eqfRVL/.8U/5u9FbAoQ.CQP1..Gxy9qO0u0bU/C"
+    },
+    {
+      "fullname": "Verify User",
+      "email": "verify@example.com",
+      "password": "$2b$10$1EvQiVrv1Z0uLg4WLK.vjeI9VHp4uHkkYPQZrB5GA4bKc/CDhPrgG"
     }
   ],
   "posts": [
