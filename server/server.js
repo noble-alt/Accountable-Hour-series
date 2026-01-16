@@ -31,11 +31,12 @@ async function saveUsers(users) {
 
 app.post('/signup', async (req, res) => {
     let { fullname, email, password } = req.body;
-    if (email) email = email.toLowerCase();
+    if (email) email = email.trim().toLowerCase();
+    if (fullname) fullname = fullname.trim();
     console.log(`Signup attempt for: ${email}`);
 
     if (!fullname || !email || !password) {
-        console.log(`Signup failed: Missing fields for ${email}`);
+        console.log(`Signup failed: Missing fields for ${email || 'unknown email'}`);
         return res.status(400).json({ message: 'Fullname, email and password are required' });
     }
 
@@ -59,10 +60,11 @@ app.post('/signup', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     let { email, password } = req.body;
-    if (email) email = email.toLowerCase();
+    if (email) email = email.trim().toLowerCase();
     console.log(`Login attempt for: ${email}`);
 
     if (!email || !password) {
+        console.log(`Login failed: Missing fields for ${email || 'unknown email'}`);
         return res.status(400).json({ message: 'Email and password are required' });
     }
 
@@ -71,12 +73,13 @@ app.post('/login', async (req, res) => {
     const user = db.users.find(user => user.email.toLowerCase() === email);
 
     if (!user) {
-        console.log(`User not found: ${email}`);
+        console.log(`Login failed: User not found: ${email}`);
         return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
+        console.log(`Login failed: Incorrect password for: ${email}`);
         return res.status(401).json({ message: 'Invalid credentials' });
     }
 
