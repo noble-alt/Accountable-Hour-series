@@ -31,8 +31,10 @@ async function saveUsers(users) {
 
 app.post('/signup', async (req, res) => {
     const { fullname, email, password } = req.body;
+    console.log(`Signup attempt for: ${email}`);
 
     if (!fullname || !email || !password) {
+        console.log(`Signup failed: Missing fields for ${email}`);
         return res.status(400).json({ message: 'Fullname, email and password are required' });
     }
 
@@ -40,6 +42,7 @@ app.post('/signup', async (req, res) => {
 
     const existingUser = db.users.find(user => user.email === email);
     if (existingUser) {
+        console.log(`Signup failed: User already exists ${email}`);
         return res.status(409).json({ message: 'Email already exists' });
     }
 
@@ -54,6 +57,7 @@ app.post('/signup', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    console.log(`Login attempt for: ${email}`);
 
     if (!email || !password) {
         return res.status(400).json({ message: 'Email and password are required' });
@@ -63,6 +67,7 @@ app.post('/login', async (req, res) => {
     const user = db.users.find(user => user.email === email);
 
     if (!user) {
+        console.log(`User not found: ${email}`);
         return res.status(401).json({ message: 'Invalid credentials' });
     }
 
