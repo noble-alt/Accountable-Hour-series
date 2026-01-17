@@ -208,23 +208,35 @@ footer {
 
 .offer-card {
   background: #e2dddd;
-  padding: 25px; /* Standard even padding */
+  padding: 30px;
   font-weight: 600;
-  color: #091c20; /* Darker color so text is readable */
+  color: #ffffff;
   display: flex;
   flex-direction: column;
-  min-height: 300px; 
+  justify-content: space-between;
+  min-height: 350px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.offer-card h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .offer-card button {
-  margin-top: auto; /* This pushes the button to the bottom */
-  align-self: flex-end; /* Optional: aligns button to the left */
-  padding: 10px 20px;
+  align-self: flex-end;
+  padding: 12px 24px;
   background: #b4793d;
-  color: #eef1dc;
+  color: #ffffff;
   border: none;
   cursor: pointer;
   width: fit-content;
+  font-weight: bold;
 }
 
 
@@ -252,6 +264,10 @@ footer {
 .mentor {
   background: #d3cccc;
   border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
 }
 
 .mentors h2{
@@ -301,33 +317,25 @@ footer {
 .stats {
   position: relative;
   display: flex;
-  gap: 60px;
-  padding: 0 40px; /* small extension of background */
-}
-
-/* background behind cards ONLY */
-.stats::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  right: 50%;
-  width: 90%;
-  height: 180px;
-  background-color: #f3eeee;
-  transform: translateY(-50%);
-  z-index: 2;
-  border: 5px solid white;
-  border-left: 5px solid white;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px;
 }
 
 /* individual cards */
 .stats div {
   position: relative;
-  z-index: 2;
   background-color: #091c20;
-  padding: 50px 40px;
+  padding: 40px;
   text-align: center;
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 200px;
+  overflow: hidden;
 }
 
 
@@ -341,7 +349,7 @@ footer {
    EVENTS (PAST & UPCOMING)
 ========================= */
 .events {
-  padding: 40px 60px;
+  padding: 90px 60px;
 }
 
 .events h2 {
@@ -351,36 +359,39 @@ footer {
 
 .event {
   display: flex;
-  gap: 40px;
-  margin-bottom: 50px;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-bottom: 40px;
+  min-height: 450px;
+  padding: 40px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
 }
 
-.event-img {
-  width: 1200px;
-  height: 400px;
-  border: 2px solid #eef1dc;
+.event-text {
+  max-width: 800px;
 }
 
 .event-text p {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 .center {
   text-align: center;
-  top: 30%;
   display: block;
   background-color: #b4793d;
   color: #eef1dc;
-  margin-right: 480px;
-  margin-left: 480px;
+  width: fit-content;
+  margin: 40px auto;
   border-radius: 10px;
-  padding: 10px;
-}
-.event a{
-  background-color: #b4793d;
-  color: #eef1dc;
-  padding: 10px;
-  border-radius: 11px;
+  padding: 12px 30px;
 }
 
 
@@ -402,17 +413,22 @@ footer {
    box-shadow: 
     0 5px 10px rgba(0,0,0,0.1), 
     0 15px 40px rgba(0,0,0,0.1);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
 }
 
 .join-text h2 {
   font-size: 36px;
   margin-bottom: 16px;
-  color: black;
+  color: #ffffff;
 }
 
 .join-text p {
   max-width: 1000px;
-  color: black;
+  color: #ffffff;
   font-size: 14px;
 }
 
@@ -425,6 +441,50 @@ footer {
   border: 2px solid black;
   font-size: 11px;
 }
+
+/* =========================
+   CARD BACKGROUNDS & OVERLAYS
+========================= */
+.offer-card::before,
+.event::before,
+.join-card::before,
+.stats div::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.offer-card > *,
+.event > *,
+.join-card > *,
+.stats div > * {
+  position: relative;
+  z-index: 2;
+}
+
+.offer-1 { background-image: url('https://loremflickr.com/800/600/plant?lock=1'); }
+.offer-2 { background-image: url('https://loremflickr.com/800/600/plant?lock=2'); }
+.offer-3 { background-image: url('https://loremflickr.com/800/600/plant?lock=3'); }
+.offer-4 { background-image: url('https://loremflickr.com/800/600/plant?lock=4'); }
+
+.mentor-1 { background-image: url('https://loremflickr.com/800/600/plant?lock=5'); }
+.mentor-2 { background-image: url('https://loremflickr.com/800/600/plant?lock=6'); }
+.mentor-3 { background-image: url('https://loremflickr.com/800/600/plant?lock=7'); }
+
+.event-1 { background-image: url('https://loremflickr.com/800/600/plant?lock=8'); }
+.event-2 { background-image: url('https://loremflickr.com/800/600/plant?lock=9'); }
+.event-3 { background-image: url('https://loremflickr.com/800/600/plant?lock=10'); }
+.event-4 { background-image: url('https://loremflickr.com/800/600/plant?lock=11'); }
+
+.stats-1 { background-image: url('https://loremflickr.com/800/600/plant?lock=12'); }
+.stats-2 { background-image: url('https://loremflickr.com/800/600/plant?lock=13'); }
+.stats-3 { background-image: url('https://loremflickr.com/800/600/plant?lock=14'); }
+.stats-4 { background-image: url('https://loremflickr.com/800/600/plant?lock=16'); }
+.stats-5 { background-image: url('https://loremflickr.com/800/600/plant?lock=17'); }
+
+.join-bg { background-image: url('https://loremflickr.com/800/600/plant?lock=15'); }
 
 /* =========================
    FOOTER
