@@ -68,6 +68,7 @@ footer {
   position: relative;
   padding-bottom: 4px;
   transition: color 0.25s ease;
+  text-decoration: none;
 }
 
 .nav-actions {

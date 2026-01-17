@@ -21,9 +21,11 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 22px 60px;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
-  position: static;
-  background-color: #091c20;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #091c20; /* Add a background color to prevent content from showing through */
 }
 
 .logo {
@@ -40,6 +42,7 @@ body {
   position: relative;
   padding-bottom: 4px;
   transition: color 0.25s ease;
+  text-decoration: none;
 }
 
 .nav-actions {
@@ -52,16 +55,20 @@ body {
     align-items: center;
     gap: 100px;
 }
+
 .btn-outline {
+  display: inline-block;
   border: 1px solid #cfcfcf;
   background: #eef1dc;
   padding: 8px 20px;
   border-radius: 20px;
+  color: #091c20 !important;
 }
 
 .btn-solid {
-  background: #091c20;
-  color: #fff;
+  display: inline-block;
+  background: #b4793d;
+  color: #fff !important;
   padding: 8px 20px;
   border-radius: 20px;
   border: none;
