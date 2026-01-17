@@ -53,10 +53,10 @@
     <h2>WHAT WE OFFER</h2>
     <p>We support students and early-career professionals with practical learning, mentorship, and access to real-world opportunities. Every program is designed to build clarity, accountability, and career readiness—helping participants move confidently from academics into professional life.</p>
     <div class="offer-grid">
-      <div class="offer-card" >NETWORKING SUMMIT <br><button> READ MORE</button> </div>
-      <div class="offer-card">SCHOLARSHIPS <br><button> READ MORE</button> </div>
-      <div class="offer-card tall">MONTHLY LEARNING SESSION <br><button> READ MORE</button> </div>
-      <div class="offer-card wide">MENTORSHIP <br> <button> READ MORE</button> </div>
+      <div class="offer-card offer-1" ><h3>NETWORKING SUMMIT</h3> <button> READ MORE</button> </div>
+      <div class="offer-card offer-2"><h3>SCHOLARSHIPS</h3> <button> READ MORE</button> </div>
+      <div class="offer-card tall offer-3"><h3>MONTHLY LEARNING SESSION</h3> <button> READ MORE</button> </div>
+      <div class="offer-card wide offer-4"><h3>MENTORSHIP</h3> <button> READ MORE</button> </div>
     </div>
   </section>
 
@@ -64,9 +64,12 @@
   <section class="mentors">
     <h2>FEATURED MENTORS</h2>
     <div class="mentor-grid">
-      <div class="mentor small"></div>
-      <div class="mentor large"></div>
-      <div class="mentor small"></div>
+      <div class="mentor small mentor-1"></div>
+      <div class="mentor large mentor-2"></div>
+      <div class="mentor small mentor-3"></div>
+    </div>
+    <div class="mentors-footer" style="margin-top: 50px;">
+      <a href="mentor-page.html" class="btn-solid">Browse All Mentors</a>
     </div>
   </section>
 
@@ -85,49 +88,54 @@
     <div class="stats-bg"></div>
 
     <div class="stats">
-      <div>
+      <div class="stats-1">
         <strong>50+</strong>
         Available mentors
       </div>
-      <div>
+      <div class="stats-2">
         <strong>100+</strong>
         Available mentees
       </div>
-      <div>
+      <div class="stats-3">
         <strong>3+</strong>
         Countries
+      </div>
+      <div class="stats-4">
+        <strong>10+</strong>
+        Programs
+      </div>
+      <div class="stats-5">
+        <strong>24/7</strong>
+        Community
       </div>
     </div>
   </div>
 
-  <a class="link">Browse Mentors</a>
   </section>
 
   <!-- PAST EVENTS -->
   <section class="events">
     <h2>Past Events</h2>
 
-    <div class="event">
-      <div class="event-img"></div>
+    <div class="event event-1">
       <div class="event-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat neque at
           interdum, a aliquet odio mattis. Cras sapien orci, tincidunt eu libero tempor,
           fermentum tempus erat. Curabitur commodo elit sit amet sem interdum bibendum.
         </p>
-        <a class="link">View Event</a>
+        <a class="btn-solid">View Event</a>
       </div>
     </div>
 
-    <div class="event">
-      <div class="event-img"></div>
+    <div class="event event-2">
       <div class="event-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat neque at
           interdum, a aliquet odio mattis. Cras sapien orci, tincidunt eu libero tempor,
           fermentum tempus erat. Curabitur commodo elit sit amet sem interdum bibendum.
         </p>
-        <a class="link">View Event</a>
+        <a class="btn-solid">View Event</a>
       </div>
     </div>
 
@@ -138,26 +146,24 @@
   <section class="events">
     <h2>Upcoming Events</h2>
 
-    <div class="event">
-      <div class="event-img"></div>
+    <div class="event event-3">
       <div class="event-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat neque at
           interdum, a aliquet odio mattis. Cras sapien orci, tincidunt eu libero tempor,
           fermentum tempus erat. Curabitur commodo elit sit amet sem interdum bibendum. </p>
-        <a class="link">View Event</a>
+        <a class="btn-solid">View Event</a>
       </div>
     </div>
 
-    <div class="event">
-      <div class="event-img"></div>
+    <div class="event event-4">
       <div class="event-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat neque at
           interdum, a aliquet odio mattis. Cras sapien orci, tincidunt eu libero tempor,
           fermentum tempus erat. Curabitur commodo elit sit amet sem interdum bibendum.
         </p>
-        <a class="link">View Event</a>
+        <a class="btn-solid">View Event</a>
       </div>
     </div>
 
@@ -166,7 +172,7 @@
 
  <!-- JOIN THE MOVEMENT -->
 <section class="join-section">
-  <div class="join-card">
+  <div class="join-card join-bg">
     <div class="join-text">
       <h2>Join the Movement</h2>
       <p>
@@ -306,18 +312,17 @@
     duration: 1
   });
 
-  // 5. EVENTS: Horizontal "Ghost" Reveal
-  // Images fade in and slide up while the text stays still
+  // 5. EVENTS: Fade and Slide Reveal
   gsap.utils.toArray(".event").forEach((event) => {
-    gsap.from(event.querySelector(".event-img"), {
+    gsap.from(event, {
       scrollTrigger: {
         trigger: event,
         start: "top 90%",
       },
-      width: "0%",
+      y: 100,
       opacity: 0,
-      duration: 1.5,
-      ease: "power3.inOut"
+      duration: 1.2,
+      ease: "power3.out"
     });
   });
 
