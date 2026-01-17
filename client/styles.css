@@ -94,10 +94,18 @@ footer {
   display: inline-block;
   background: #b4793d;
   color: #fff !important;
-  padding: 8px 20px;
+  padding: 10px 24px;
   border-radius: 20px;
   border: none;
   box-shadow: 0 0 15px rgba(238, 241, 220, 0.4);
+  font-weight: 600;
+  text-align: center;
+}
+
+.btn-container-center {
+  text-align: center;
+  margin: 40px auto;
+  width: 100%;
 }
 /* =========================
    HERO SECTION
@@ -383,16 +391,6 @@ footer {
   line-height: 1.6;
 }
 
-.center {
-  text-align: center;
-  display: block;
-  background-color: #b4793d;
-  color: #eef1dc;
-  width: fit-content;
-  margin: 40px auto;
-  border-radius: 10px;
-  padding: 12px 30px;
-}
 
 
 /* =========================
@@ -447,8 +445,7 @@ footer {
 ========================= */
 .offer-card::before,
 .event::before,
-.join-card::before,
-.stats div::before {
+.join-card::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -458,33 +455,26 @@ footer {
 
 .offer-card > *,
 .event > *,
-.join-card > *,
-.stats div > * {
+.join-card > * {
   position: relative;
   z-index: 2;
 }
 
-.offer-1 { background-image: url('https://loremflickr.com/800/600/plant?lock=1'); }
-.offer-2 { background-image: url('https://loremflickr.com/800/600/plant?lock=2'); }
-.offer-3 { background-image: url('https://loremflickr.com/800/600/plant?lock=3'); }
-.offer-4 { background-image: url('https://loremflickr.com/800/600/plant?lock=4'); }
+.offer-1 { background-image: url('https://loremflickr.com/800/600/books,library?lock=1'); }
+.offer-2 { background-image: url('https://loremflickr.com/800/600/books,library?lock=2'); }
+.offer-3 { background-image: url('https://loremflickr.com/800/600/books,library?lock=3'); }
+.offer-4 { background-image: url('https://loremflickr.com/800/600/books,library?lock=4'); }
 
-.mentor-1 { background-image: url('https://loremflickr.com/800/600/plant?lock=5'); }
-.mentor-2 { background-image: url('https://loremflickr.com/800/600/plant?lock=6'); }
-.mentor-3 { background-image: url('https://loremflickr.com/800/600/plant?lock=7'); }
+.mentor-1 { background-image: url('https://loremflickr.com/800/600/books,library?lock=5'); }
+.mentor-2 { background-image: url('https://loremflickr.com/800/600/books,library?lock=6'); }
+.mentor-3 { background-image: url('https://loremflickr.com/800/600/books,library?lock=7'); }
 
-.event-1 { background-image: url('https://loremflickr.com/800/600/plant?lock=8'); }
-.event-2 { background-image: url('https://loremflickr.com/800/600/plant?lock=9'); }
-.event-3 { background-image: url('https://loremflickr.com/800/600/plant?lock=10'); }
-.event-4 { background-image: url('https://loremflickr.com/800/600/plant?lock=11'); }
+.event-1 { background-image: url('https://loremflickr.com/800/600/books,library?lock=8'); }
+.event-2 { background-image: url('https://loremflickr.com/800/600/books,library?lock=9'); }
+.event-3 { background-image: url('https://loremflickr.com/800/600/books,library?lock=10'); }
+.event-4 { background-image: url('https://loremflickr.com/800/600/books,library?lock=11'); }
 
-.stats-1 { background-image: url('https://loremflickr.com/800/600/plant?lock=12'); }
-.stats-2 { background-image: url('https://loremflickr.com/800/600/plant?lock=13'); }
-.stats-3 { background-image: url('https://loremflickr.com/800/600/plant?lock=14'); }
-.stats-4 { background-image: url('https://loremflickr.com/800/600/plant?lock=16'); }
-.stats-5 { background-image: url('https://loremflickr.com/800/600/plant?lock=17'); }
-
-.join-bg { background-image: url('https://loremflickr.com/800/600/plant?lock=15'); }
+.join-bg { background-image: url('https://loremflickr.com/800/600/books,library?lock=15'); }
 
 /* =========================
    FOOTER
