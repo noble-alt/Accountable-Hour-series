@@ -1,7 +1,0 @@
-
-> accountable-futures@1.0.0 start
-> node server/server.js
-
-Server is running on http://0.0.0.0:3000
-[2026-01-17T11:26:47.456Z] HEAD /health
-Terminated
