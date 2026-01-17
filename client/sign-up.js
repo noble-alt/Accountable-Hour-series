@@ -51,6 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUI(mode);
     });
 
+    // Redirect if already logged in
+    if (localStorage.getItem('token')) {
+        window.location.href = 'index.html';
+        return;
+    }
+
     // Initialize UI based on hash
     const initialMode = window.location.hash === '#signin' ? 'signin' : 'signup';
     updateUI(initialMode);
@@ -61,11 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSignUp = window.location.hash !== '#signin';
         const endpoint = isSignUp ? '/signup' : '/login';
 
+        // More compatible form data extraction with trimming
+        const data = {};
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+        for (let [key, value] of formData.entries()) {
+            data[key] = typeof value === 'string' ? value.trim() : value;
+        }
 
         if (!isSignUp) {
             delete data.fullname;
+        } else if (!data.fullname) {
+            showError('Fullname is required for signup');
+            return;
         }
 
         const originalBtnText = submitBtn.textContent;
@@ -93,9 +106,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (result.token) {
                     localStorage.setItem('token', result.token);
                 }
-                // We'll still use alert for success as it's a critical confirmation before redirect
-                alert(result.message || 'Success!');
-                window.location.href = 'index.html';
+
+                // Show success message on page instead of alert for better UX
+                submitBtn.textContent = 'Success!';
+                submitBtn.style.backgroundColor = '#6a994e';
+
+                const successMsg = document.createElement('div');
+                successMsg.textContent = (result.message || 'Success!') + ' Redirecting...';
+                successMsg.style.color = '#6a994e';
+                successMsg.style.marginTop = '10px';
+                form.appendChild(successMsg);
+
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
             } else {
                 showError(result.message || 'An error occurred during ' + (isSignUp ? 'signup' : 'login'));
                 submitBtn.textContent = originalBtnText;
