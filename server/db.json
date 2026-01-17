@@ -79,6 +79,11 @@
       "fullname": "Existing",
       "email": "dup_4021@example.com",
       "password": "$2b$10$83FGIDUtMJgMX5d6oitbE.Ir64gEiofQA9jhx3Ii689WFtuUoCd0y"
+    },
+    {
+      "fullname": "abdulazeez idris",
+      "email": "abdulazeezidris040@gmail.com",
+      "password": "$2b$10$HW5w0fNauCQQKI4SoOQNaO.tos/U9zwuzd1Mi3JzeRal0ZGT3..ny"
     }
   ],
   "posts": [
