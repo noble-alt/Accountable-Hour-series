@@ -1,1 +1,27 @@
-Server is running on http://localhost:3000
+Server is running on http://0.0.0.0:3000
+[2026-01-17T09:26:23.085Z] GET /sign-up.html
+[2026-01-17T09:26:23.107Z] GET /sign-up.css
+[2026-01-17T09:26:23.109Z] GET /sign-up.js
+[2026-01-17T09:26:23.216Z] GET /health
+[2026-01-17T09:26:23.450Z] POST /signup
+Body: {
+  fullname: 'Existing',
+  email: 'dup_4021@example.com',
+  password: '***'
+}
+Signup attempt for: dup_4021@example.com
+[2026-01-17T09:26:25.087Z] GET /index.html
+[2026-01-17T09:26:25.099Z] GET /styles.css
+[2026-01-17T09:26:25.100Z] GET /script.js
+[2026-01-17T09:26:25.448Z] GET /sign-up.html
+[2026-01-17T09:26:25.457Z] GET /sign-up.css
+[2026-01-17T09:26:25.458Z] GET /sign-up.js
+[2026-01-17T09:26:25.475Z] GET /health
+[2026-01-17T09:26:25.570Z] POST /signup
+Body: {
+  fullname: 'Duplicate User',
+  email: 'dup_4021@example.com',
+  password: '***'
+}
+Signup attempt for: dup_4021@example.com
+Signup failed: User already exists dup_4021@example.com
