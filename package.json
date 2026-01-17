@@ -1,19 +1,19 @@
 {
-  "name": "accountable-futures",
+  "name": "accountable-hour-series",
   "version": "1.0.0",
-  "description": "Accountable Futures Professional Development Platform",
-  "main": "server/server.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "node server/server.js",
-    "server": "node server/server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^3.0.3",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.3"
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
   }
 }

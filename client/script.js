@@ -1,97 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Theme Toggle Logic (if applicable)
+    // Theme toggling
     const themeToggle = document.getElementById('theme-toggle');
-    const lightIcon = document.getElementById('theme-icon-light');
-    const darkIcon = document.getElementById('theme-icon-dark');
-
-    const applyTheme = (theme) => {
-        if (!lightIcon || !darkIcon) return;
-        if (theme === 'dark') {
-            document.body.classList.add('dark-mode');
-            lightIcon.style.display = 'none';
-            darkIcon.style.display = 'block';
-        } else {
-            document.body.classList.remove('dark-mode');
-            lightIcon.style.display = 'block';
-            darkIcon.style.display = 'none';
-        }
-    };
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        applyTheme(savedTheme);
-    }
+    const themeIconLight = document.getElementById('theme-icon-light');
+    const themeIconDark = document.getElementById('theme-icon-dark');
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
             const isDarkMode = document.body.classList.contains('dark-mode');
-            const newTheme = isDarkMode ? 'light' : 'dark';
-            localStorage.setItem('theme', newTheme);
-            applyTheme(newTheme);
+
+            if (isDarkMode) {
+                themeIconLight.style.display = 'none';
+                themeIconDark.style.display = 'block';
+            } else {
+                themeIconLight.style.display = 'block';
+                themeIconDark.style.display = 'none';
+            }
+
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         });
     }
 
-    // Login/Logout Toggle Logic
-    const token = localStorage.getItem('token');
-    // Select all links in the navbar
-    const navLinks = document.querySelectorAll('.navbar a, .nav-links a, .nav-actions a');
-
-    navLinks.forEach(link => {
-        const text = link.textContent.trim().toLowerCase();
-        // Specifically target "Log In" or "Log Out" links
-        if (text === 'log in' || text === 'log out') {
-            if (token) {
-                link.textContent = 'Log Out';
-                link.href = '#';
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    localStorage.removeItem('token');
-                    window.location.href = 'index.html';
-                });
-            } else {
-                link.textContent = 'Log In';
-                link.href = 'sign-up.html#signin';
-            }
-        }
-    });
-
-    if (token) {
-        // Update Hero/Action buttons to redirect to Discussion Board if they point to signup
-        const actionButtons = document.querySelectorAll('.hero a, .hero-text a, .join-section a, .join-card a, .btn-solid');
-        actionButtons.forEach(btn => {
-            const link = btn.tagName === 'A' ? btn : btn.querySelector('a');
-            if (link && (link.getAttribute('href') === 'sign-up.html' || link.getAttribute('href') === 'sign-up.html#signup')) {
-                link.textContent = 'Join Discussion';
-                link.href = 'discussion-board.html';
-            }
-        });
+    // Initialize theme from localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        if (themeIconLight) themeIconLight.style.display = 'none';
+        if (themeIconDark) themeIconDark.style.display = 'block';
     }
 
-    // Mobile Menu Toggle
-    const mobileMenu = document.getElementById('mobile-menu');
-    const nav = document.querySelector('.navbar nav') || document.querySelector('.nav-links');
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu');
+    const navbar = document.querySelector('.navbar nav');
 
-    if (mobileMenu && nav) {
-        mobileMenu.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            const icon = mobileMenu.querySelector('i');
-            if (nav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+    if (mobileMenuBtn && navbar) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
             }
-        });
-
-        // Close menu when clicking a link
-        nav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                const icon = mobileMenu.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
         });
     }
 });
+
+/**
+ * Helper to get the base API URL.
+ * It will use port 3000 if the frontend is served via a different port (like 5500 for Live Server).
+ */
+function getApiBase() {
+    const { protocol, hostname, port } = window.location;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        if (port !== '3000' && port !== '') {
+            return `${protocol}//${hostname}:3000/api`;
+        }
+    }
+    return '/api';
+}

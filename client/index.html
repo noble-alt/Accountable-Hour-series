@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Accountable Futures</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
@@ -19,7 +19,7 @@
   <header class="navbar">
     <div class="logo"> <a href="index.html"></a></div>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="index.html" class="active">Home</a>
       <a href="about-us.html">About Us</a>
       <a href="mentor-page.html">Services</a>
       <a href="event.html">Events</a>
@@ -27,9 +27,17 @@
       <a href="discussion-board.html">Discussion Board</a>
     </nav>
     <div class="menu-toggle" id="mobile-menu">
-      <i class="fas fa-bars"></i>
+        <i class="fas fa-bars"></i>
     </div>
     <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle-btn">
+          <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
+              <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+          </svg>
+          <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 16 16" style="display: none;">
+              <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+          </svg>
+      </button>
       <a href="sign-up.html#signin" class="btn-outline">Log In</a>
       <a href="mentor-page.html" class="btn-solid">Meet Mentors</a>
     </div>
@@ -37,7 +45,7 @@
 
   <!-- HERO -->
   <section class="hero hero-background">
-    <video autoplay loop muted playsinline class="hero-video"></video>
+    <video autoplay loop muted playsinline class="hero-video" src="image/2127-155244168.mp4"> </video>
     <h1>Bridging the Gap between the Classroom and the real Work life</h1>
     <p>
       The Accountable Future Series is a structured professional development and mentorship
@@ -57,10 +65,10 @@
     <h2>WHAT WE OFFER</h2>
     <p>We support students and early-career professionals with practical learning, mentorship, and access to real-world opportunities. Every program is designed to build clarity, accountability, and career readiness—helping participants move confidently from academics into professional life.</p>
     <div class="offer-grid">
-      <div class="offer-card">NETWORKING SUMMIT <br><button> READ MORE</button> </div>
-      <div class="offer-card">SCHOLARSHIPS <br><button> READ MORE</button> </div>
-      <div class="offer-card tall">MONTHLY LEARNING SESSION <br><button> READ MORE</button> </div>
-      <div class="offer-card wide">MENTORSHIP <br> <button> READ MORE</button> </div>
+      <div class="offer-card offer-1" ><h3>NETWORKING SUMMIT</h3> <button> READ MORE</button> </div>
+      <div class="offer-card offer-2"><h3>SCHOLARSHIPS</h3> <button> READ MORE</button> </div>
+      <div class="offer-card tall offer-3"><h3>MONTHLY LEARNING SESSION</h3> <button> READ MORE</button> </div>
+      <div class="offer-card wide offer-4"><h3>MENTORSHIP</h3> <button> READ MORE</button> </div>
     </div>
   </section>
 
@@ -68,9 +76,12 @@
   <section class="mentors">
     <h2>FEATURED MENTORS</h2>
     <div class="mentor-grid">
-      <div class="mentor small"></div>
-      <div class="mentor large"></div>
-      <div class="mentor small"></div>
+      <div class="mentor small mentor-1"></div>
+      <div class="mentor large mentor-2"></div>
+      <div class="mentor small mentor-3"></div>
+    </div>
+    <div class="mentors-footer" style="margin-top: 50px;">
+      <a href="mentor-page.html" class="btn-solid">Browse All Mentors</a>
     </div>
   </section>
 
@@ -89,49 +100,54 @@
     <div class="stats-bg"></div>
 
     <div class="stats">
-      <div>
+      <div class="stats-1">
         <strong>50+</strong>
         Available mentors
       </div>
-      <div>
+      <div class="stats-2">
         <strong>100+</strong>
         Available mentees
       </div>
-      <div>
+      <div class="stats-3">
         <strong>3+</strong>
         Countries
+      </div>
+      <div class="stats-4">
+        <strong>10+</strong>
+        Programs
+      </div>
+      <div class="stats-5">
+        <strong>24/7</strong>
+        Community
       </div>
     </div>
   </div>
 
-  <a class="link">Browse Mentors</a>
   </section>
 
   <!-- PAST EVENTS -->
   <section class="events">
     <h2>Past Events</h2>
 
-    <div class="event">
-      <div class="event-img"></div>
+    <div class="event event-1">
       <div class="event-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat neque at
           interdum, a aliquet odio mattis. Cras sapien orci, tincidunt eu libero tempor,
           fermentum tempus erat. Curabitur commodo elit sit amet sem interdum bibendum.
         </p>
-        <a class="link">View Event</a>
+        <a class="btn-solid">View Event</a>
       </div>
     </div>
 
-    <div class="event">
-      <div class="event-img"></div>
+    <div class="event event-2">
       <div class="event-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat neque at
           interdum, a aliquet odio mattis. Cras sapien orci, tincidunt eu libero tempor,
           fermentum tempus erat. Curabitur commodo elit sit amet sem interdum bibendum.
         </p>
-        <a class="link">View Event</a>
+        <a class="btn-solid">View Event</a>
       </div>
     </div>
 
@@ -142,26 +158,24 @@
   <section class="events">
     <h2>Upcoming Events</h2>
 
-    <div class="event">
-      <div class="event-img"></div>
+    <div class="event event-3">
       <div class="event-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat neque at
           interdum, a aliquet odio mattis. Cras sapien orci, tincidunt eu libero tempor,
           fermentum tempus erat. Curabitur commodo elit sit amet sem interdum bibendum. </p>
-        <a class="link">View Event</a>
+        <a class="btn-solid">View Event</a>
       </div>
     </div>
 
-    <div class="event">
-      <div class="event-img"></div>
+    <div class="event event-4">
       <div class="event-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat neque at
           interdum, a aliquet odio mattis. Cras sapien orci, tincidunt eu libero tempor,
           fermentum tempus erat. Curabitur commodo elit sit amet sem interdum bibendum.
         </p>
-        <a class="link">View Event</a>
+        <a class="btn-solid">View Event</a>
       </div>
     </div>
 
@@ -170,7 +184,7 @@
 
  <!-- JOIN THE MOVEMENT -->
 <section class="join-section">
-  <div class="join-card">
+  <div class="join-card join-bg">
     <div class="join-text">
       <h2>Join the Movement</h2>
       <p>
@@ -203,7 +217,7 @@
     <a href="event.html">Events</a>
     <a href="gallery.html">Gallery</a>
     <a href="about-us.html">About us</a>
-    <a href="services.html">Services</a>
+    <a href="mentor-page.html">Services</a>
     <a href="contact-us.html">Contact Us</a>
   </div>
 
@@ -310,18 +324,17 @@
     duration: 1
   });
 
-  // 5. EVENTS: Horizontal "Ghost" Reveal
-  // Images fade in and slide up while the text stays still
+  // 5. EVENTS: Fade and Slide Reveal
   gsap.utils.toArray(".event").forEach((event) => {
-    gsap.from(event.querySelector(".event-img"), {
+    gsap.from(event, {
       scrollTrigger: {
         trigger: event,
         start: "top 90%",
       },
-      width: "0%",
+      y: 100,
       opacity: 0,
-      duration: 1.5,
-      ease: "power3.inOut"
+      duration: 1.2,
+      ease: "power3.out"
     });
   });
 
