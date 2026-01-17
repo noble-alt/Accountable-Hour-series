@@ -11,11 +11,18 @@ app.use(express.json());
 
 // Request logging middleware
 app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    const start = Date.now();
+    console.log(`[${new Date().toISOString()}] Incoming ${req.method} ${req.url}`);
+
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        console.log(`[${new Date().toISOString()}] Completed ${req.method} ${req.url} - ${res.statusCode} (${duration}ms)`);
+    });
+
     if (req.method === 'POST' && req.body) {
         const loggedBody = { ...req.body };
         if (loggedBody.password) loggedBody.password = '***';
-        console.log('Body:', loggedBody);
+        console.log('Request Body:', loggedBody);
     }
     next();
 });
@@ -46,62 +53,77 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-app.post('/signup', async (req, res) => {
-    let { fullname, email, password } = req.body;
-    if (email) email = email.trim().toLowerCase();
-    if (fullname) fullname = fullname.trim();
-    console.log(`Signup attempt for: ${email}`);
+app.post('/signup', async (req, res, next) => {
+    try {
+        let { fullname, email, password } = req.body;
+        if (email) email = email.trim().toLowerCase();
+        if (fullname) fullname = fullname.trim();
+        console.log(`[Signup] Processing attempt for: ${email}`);
 
-    if (!fullname || !email || !password) {
-        console.log(`Signup failed: Missing fields for ${email || 'unknown email'}`);
-        return res.status(400).json({ message: 'Fullname, email and password are required' });
+        if (!fullname || !email || !password) {
+            console.warn(`[Signup] Validation failed: Missing fields for ${email || 'unknown'}`);
+            return res.status(400).json({ message: 'Fullname, email and password are required' });
+        }
+
+        const db = await getUsers();
+        db.users = db.users || [];
+
+        const existingUser = db.users.find(user => user.email && user.email.toLowerCase() === email);
+        if (existingUser) {
+            console.warn(`[Signup] Conflict: Email already exists: ${email}`);
+            return res.status(409).json({ message: 'Email already exists' });
+        }
+
+        console.log(`[Signup] Hashing password for: ${email}`);
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = { fullname, email, password: hashedPassword };
+
+        db.users.push(newUser);
+        await saveUsers(db);
+        console.log(`[Signup] User saved successfully: ${email}`);
+
+        const token = jwt.sign({ email: newUser.email }, JWT_SECRET, { expiresIn: '1h' });
+        res.status(201).json({ message: 'User created successfully', token });
+    } catch (error) {
+        console.error(`[Signup] Critical error for ${req.body.email}:`, error);
+        next(error);
     }
-
-    const db = await getUsers();
-    db.users = db.users || [];
-
-    const existingUser = db.users.find(user => user.email.toLowerCase() === email);
-    if (existingUser) {
-        console.log(`Signup failed: User already exists ${email}`);
-        return res.status(409).json({ message: 'Email already exists' });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = { fullname, email, password: hashedPassword };
-    db.users.push(newUser);
-    await saveUsers(db);
-
-    const token = jwt.sign({ email: newUser.email }, JWT_SECRET, { expiresIn: '1h' });
-    res.status(201).json({ message: 'User created successfully', token });
 });
 
-app.post('/login', async (req, res) => {
-    let { email, password } = req.body;
-    if (email) email = email.trim().toLowerCase();
-    console.log(`Login attempt for: ${email}`);
+app.post('/login', async (req, res, next) => {
+    try {
+        let { email, password } = req.body;
+        if (email) email = email.trim().toLowerCase();
+        console.log(`[Login] Processing attempt for: ${email}`);
 
-    if (!email || !password) {
-        console.log(`Login failed: Missing fields for ${email || 'unknown email'}`);
-        return res.status(400).json({ message: 'Email and password are required' });
+        if (!email || !password) {
+            console.warn(`[Login] Validation failed: Missing fields for ${email || 'unknown'}`);
+            return res.status(400).json({ message: 'Email and password are required' });
+        }
+
+        const db = await getUsers();
+        db.users = db.users || [];
+        const user = db.users.find(user => user.email && user.email.toLowerCase() === email);
+
+        if (!user) {
+            console.warn(`[Login] Failure: User not found: ${email}`);
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        console.log(`[Login] Verifying password for: ${email}`);
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            console.warn(`[Login] Failure: Incorrect password for: ${email}`);
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        console.log(`[Login] Success: Generating token for: ${email}`);
+        const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({ message: 'Login successful', token });
+    } catch (error) {
+        console.error(`[Login] Critical error for ${req.body.email}:`, error);
+        next(error);
     }
-
-    const db = await getUsers();
-    db.users = db.users || [];
-    const user = db.users.find(user => user.email.toLowerCase() === email);
-
-    if (!user) {
-        console.log(`Login failed: User not found: ${email}`);
-        return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-        console.log(`Login failed: Incorrect password for: ${email}`);
-        return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
-    res.status(200).json({ message: 'Login successful', token });
 });
 
 app.post('/admin/login', (req, res) => {

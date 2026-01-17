@@ -87,5 +87,35 @@
         </div>
     </footer>
 
-<script src="script.js"></script></body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".grid-item", {
+    scrollTrigger: {
+      trigger: ".main-grid",
+      start: "top 80%"
+    },
+    scale: 0.8,
+    opacity: 0,
+    stagger: 0.1,
+    duration: 0.8,
+    ease: "power2.out"
+  });
+
+  gsap.from(".m-item", {
+    scrollTrigger: {
+      trigger: ".moments-grid",
+      start: "top 80%"
+    },
+    y: 50,
+    opacity: 0,
+    stagger: 0.1,
+    duration: 0.8,
+    ease: "power2.out"
+  });
+</script>
+</body>
 </html>

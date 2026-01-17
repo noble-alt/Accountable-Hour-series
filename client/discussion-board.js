@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (window.location.protocol === 'file:') {
             return 'http://localhost:3000';
         }
+        if (window.location.port === '3000') {
+            return '';
+        }
         const protocol = window.location.protocol;
         const hostname = window.location.hostname;
-        if (!window.location.port || window.location.port !== '3000') {
-            return `${protocol}//${hostname}:3000`;
-        }
-        return '';
+        return `${protocol}//${hostname}:3000`;
     };
 
     const API_BASE = getApiBase();
@@ -34,8 +34,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Authorization": `Bearer ${token}`
             }
         });
+
+        if (response.status === 401) {
+            localStorage.removeItem('token');
+            token = null;
+            return fetchPosts();
+        }
+
+        if (!response.ok) {
+            postContainer.innerHTML = `<p style="color: red; text-align: center;">Error loading posts: ${response.statusText}</p>`;
+            return;
+        }
+
         const posts = await response.json();
         postContainer.innerHTML = "";
+
+        if (!Array.isArray(posts)) {
+            postContainer.innerHTML = `<p style="text-align: center;">No discussions found or error in data format.</p>`;
+            return;
+        }
+
         posts.forEach(post => {
             const postElement = document.createElement("div");
             postElement.classList.add("post");

@@ -1,3 +1,0 @@
-Server is running on http://0.0.0.0:3000
-[2026-01-17T10:11:12.300Z] HEAD /health
-[2026-01-17T10:12:15.949Z] GET /health

@@ -276,6 +276,9 @@ footer {
   background-position: center;
   position: relative;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .mentors h2{
@@ -334,11 +337,8 @@ footer {
 /* individual cards */
 .stats div {
   position: relative;
-  background-color: #091c20;
   padding: 40px;
   text-align: center;
-  background-size: cover;
-  background-position: center;
   color: #ffffff;
   border-radius: 12px;
   flex: 1;
@@ -368,26 +368,32 @@ footer {
 .event {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin-bottom: 40px;
   min-height: 450px;
-  padding: 40px;
   border-radius: 12px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
   overflow: hidden;
   color: #ffffff;
+  padding: 40px;
+}
+
+.event-img {
+  display: none;
 }
 
 .event-text {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   max-width: 800px;
 }
 
 .event-text p {
   margin-bottom: 24px;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -443,7 +449,20 @@ footer {
 /* =========================
    CARD BACKGROUNDS & OVERLAYS
 ========================= */
+.offer-card,
+.mentor,
+.stats div,
+.event,
+.join-card {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
 .offer-card::before,
+.mentor::before,
+.stats div::before,
 .event::before,
 .join-card::before {
   content: "";
@@ -454,27 +473,35 @@ footer {
 }
 
 .offer-card > *,
+.mentor > *,
+.stats div > *,
 .event > *,
 .join-card > * {
   position: relative;
   z-index: 2;
 }
 
-.offer-1 { background-image: url('https://loremflickr.com/800/600/books,library?lock=1'); }
-.offer-2 { background-image: url('https://loremflickr.com/800/600/books,library?lock=2'); }
-.offer-3 { background-image: url('https://loremflickr.com/800/600/books,library?lock=3'); }
-.offer-4 { background-image: url('https://loremflickr.com/800/600/books,library?lock=4'); }
+.offer-1 { background-image: url('https://loremflickr.com/800/600/plants?lock=1'); }
+.offer-2 { background-image: url('https://loremflickr.com/800/600/plants?lock=2'); }
+.offer-3 { background-image: url('https://loremflickr.com/800/600/plants?lock=3'); }
+.offer-4 { background-image: url('https://loremflickr.com/800/600/plants?lock=4'); }
 
-.mentor-1 { background-image: url('https://loremflickr.com/800/600/books,library?lock=5'); }
-.mentor-2 { background-image: url('https://loremflickr.com/800/600/books,library?lock=6'); }
-.mentor-3 { background-image: url('https://loremflickr.com/800/600/books,library?lock=7'); }
+.mentor-1 { background-image: url('https://loremflickr.com/800/600/plants?lock=5'); }
+.mentor-2 { background-image: url('https://loremflickr.com/800/600/plants?lock=6'); }
+.mentor-3 { background-image: url('https://loremflickr.com/800/600/plants?lock=7'); }
 
-.event-1 { background-image: url('https://loremflickr.com/800/600/books,library?lock=8'); }
-.event-2 { background-image: url('https://loremflickr.com/800/600/books,library?lock=9'); }
-.event-3 { background-image: url('https://loremflickr.com/800/600/books,library?lock=10'); }
-.event-4 { background-image: url('https://loremflickr.com/800/600/books,library?lock=11'); }
+.event-1 { background-image: url('https://loremflickr.com/800/600/plants?lock=8'); }
+.event-2 { background-image: url('https://loremflickr.com/800/600/plants?lock=9'); }
+.event-3 { background-image: url('https://loremflickr.com/800/600/plants?lock=10'); }
+.event-4 { background-image: url('https://loremflickr.com/800/600/plants?lock=11'); }
 
-.join-bg { background-image: url('https://loremflickr.com/800/600/books,library?lock=15'); }
+.stats-1 { background-image: url('https://loremflickr.com/800/600/plants?lock=12'); }
+.stats-2 { background-image: url('https://loremflickr.com/800/600/plants?lock=13'); }
+.stats-3 { background-image: url('https://loremflickr.com/800/600/plants?lock=14'); }
+.stats-4 { background-image: url('https://loremflickr.com/800/600/plants?lock=15'); }
+.stats-5 { background-image: url('https://loremflickr.com/800/600/plants?lock=16'); }
+
+.join-bg { background-image: url('https://loremflickr.com/800/600/plants?lock=17'); }
 
 /* =========================
    FOOTER

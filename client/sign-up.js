@@ -53,15 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const getApiBase = () => {
+        // If we're on file protocol, we must use absolute localhost
         if (window.location.protocol === 'file:') {
             return 'http://localhost:3000';
         }
+
+        // If we're on the same port as the expected server (3000), use relative paths
+        if (window.location.port === '3000') {
+            return '';
+        }
+
+        // If we're on a different port (e.g. Live Server), try to guess the API location
+        // but default to absolute localhost to avoid cross-origin confusion if not specified
         const protocol = window.location.protocol;
         const hostname = window.location.hostname;
-        if (!window.location.port || window.location.port !== '3000') {
-            return `${protocol}//${hostname}:3000`;
-        }
-        return '';
+        return `${protocol}//${hostname}:3000`;
     };
 
     const API_BASE = getApiBase();
@@ -130,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSignUp = window.location.hash !== '#signin';
         const endpoint = API_BASE + (isSignUp ? '/signup' : '/login');
 
-        console.log(`Form submitted for ${isSignUp ? 'signup' : 'login'} at ${endpoint}`);
+        console.log(`[Auth] Form submitted for ${isSignUp ? 'signup' : 'login'} at ${endpoint}`);
 
         // More robust form data extraction
         const data = {};
@@ -152,23 +158,35 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.textContent = 'Processing...';
         submitBtn.disabled = true;
 
+        // Implementation of fetch with timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
         try {
-            console.log('Sending data:', { ...data, password: '***' });
+            console.log('[Auth] Sending data to:', endpoint);
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
+                signal: controller.signal
             });
-            console.log('Response status:', response.status);
+            clearTimeout(timeoutId);
+            console.log('[Auth] Response status:', response.status);
 
             let result;
             const contentType = response.headers.get("content-type");
-            if (contentType && contentType.indexOf("application/json") !== -1) {
-                result = await response.json();
-            } else {
-                result = { message: await response.text() };
+            try {
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    result = await response.json();
+                } else {
+                    const text = await response.text();
+                    result = { message: text };
+                }
+            } catch (parseError) {
+                console.error('[Auth] Result parse error:', parseError);
+                result = { message: 'Failed to parse server response' };
             }
 
             if (response.ok) {
@@ -196,18 +214,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = 'index.html';
                 }, 1500);
             } else {
-                console.warn('Request failed:', response.status, result.message);
-                let msg = result.message || 'An error occurred during ' + (isSignUp ? 'signup' : 'login');
+                console.warn('[Auth] Request failed:', response.status, result.message);
+                let msg = result.message || `Server returned ${response.status}: ${response.statusText}`;
                 if (isSignUp && response.status === 409) {
                     msg += '<br><a href="#signin" style="color: #b4793d; text-decoration: underline; font-weight: bold;">Click here to Sign In instead!</a>';
                 }
-                showError(msg);
+                showError(`<strong>Authentication Failed:</strong> ${msg}`);
                 submitBtn.textContent = originalBtnText;
                 submitBtn.disabled = false;
             }
         } catch (error) {
-            console.error('Error:', error);
-            showError(`<strong>Network Error:</strong> ${error.message}<br>Please ensure the server is running on port 3000 and CORS allows requests from this origin.`);
+            clearTimeout(timeoutId);
+            console.error('[Auth] Fetch Error:', error);
+            let errorMessage = error.message;
+            if (error.name === 'AbortError') {
+                errorMessage = 'Request timed out after 10 seconds. The server might be busy or unreachable.';
+            }
+            showError(`<strong>Network Error:</strong> ${errorMessage}<br><br>
+                <small>Technical Details:<br>
+                Target URL: <code>${endpoint}</code><br>
+                Current Origin: <code>${window.location.origin}</code><br>
+                Mode: <code>${isSignUp ? 'Signup' : 'Login'}</code></small>`);
             submitBtn.textContent = originalBtnText;
             submitBtn.disabled = false;
         }

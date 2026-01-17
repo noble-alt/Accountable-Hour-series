@@ -26,61 +26,6 @@
       "password": "$2b$10$Xy/Lpc3HxJNzbF.GFtIiheKXgwK5PtvF0D6RRovypO6Uxk4sKlMIC"
     },
     {
-      "fullname": "Verify User",
-      "email": "user_9274@example.com",
-      "password": "$2b$10$IqD5ortc4B5N8R3Ut792iOlC.4Q7mB984fQsyqxmcjNQKNUGbkJEG"
-    },
-    {
-      "fullname": "New Test",
-      "email": "newtest@example.com",
-      "password": "$2b$10$mgu9eV4dAR/qXC1aCQQ6TeRqUAk/nw0DXaJiipwjnD1rq3BgWTuaS"
-    },
-    {
-      "fullname": "Test User",
-      "email": "test@test.com",
-      "password": "$2b$10$mWROuEpb/mxpJzNtcOAyfep2riDdmQK0CSG/VSELxvPsyO5/7/F.W"
-    },
-    {
-      "fullname": "Test Again",
-      "email": "testagain@example.com",
-      "password": "$2b$10$A9YOacrj5pl5wKjeezBn6eghMoAytbqr3cFavwiGwMPXul/Tm0M4K"
-    },
-    {
-      "fullname": "Final Test",
-      "email": "final_1768583000@example.com",
-      "password": "$2b$10$OmvwkjBbwtRSk0gBJJFzvuPHFnyvQgUDDFMKOqDvgwc8ymtjglNO."
-    },
-    {
-      "fullname": "Jules Test",
-      "email": "jules@example.com",
-      "password": "$2b$10$qceHB8mQmM1UCe3rc8ek/.XblY/K0MgSzJnirg1/pec2DqXuJA2p2"
-    },
-    {
-      "fullname": "Trim Test",
-      "email": "trimtest@example.com",
-      "password": "$2b$10$085mTbu4MtSCk6eqfRVL/.8U/5u9FbAoQ.CQP1..Gxy9qO0u0bU/C"
-    },
-    {
-      "fullname": "Verify User",
-      "email": "verify@example.com",
-      "password": "$2b$10$1EvQiVrv1Z0uLg4WLK.vjeI9VHp4uHkkYPQZrB5GA4bKc/CDhPrgG"
-    },
-    {
-      "fullname": "Log Test",
-      "email": "logtest@example.com",
-      "password": "$2b$10$hcuCbqPHkh5hC.jKeATgruYL4voDxFH8tt65pyAABVvizTb7GQgQq"
-    },
-    {
-      "fullname": "Full Flow Test",
-      "email": "user_95939@example.com",
-      "password": "$2b$10$0p8zZGA7WrlO2VdtT3s.hO8JeW6Nk/YnR58mGD4PF0zGdU8/zGlxi"
-    },
-    {
-      "fullname": "Existing",
-      "email": "dup_4021@example.com",
-      "password": "$2b$10$83FGIDUtMJgMX5d6oitbE.Ir64gEiofQA9jhx3Ii689WFtuUoCd0y"
-    },
-    {
       "fullname": "abdulazeez idris",
       "email": "abdulazeezidris040@gmail.com",
       "password": "$2b$10$HW5w0fNauCQQKI4SoOQNaO.tos/U9zwuzd1Mi3JzeRal0ZGT3..ny"

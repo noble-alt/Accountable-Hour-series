@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (window.location.protocol === 'file:') {
             return 'http://localhost:3000';
         }
+        if (window.location.port === '3000') {
+            return '';
+        }
         const protocol = window.location.protocol;
         const hostname = window.location.hostname;
-        if (!window.location.port || window.location.port !== '3000') {
-            return `${protocol}//${hostname}:3000`;
-        }
-        return '';
+        return `${protocol}//${hostname}:3000`;
     };
 
     const API_BASE = getApiBase();
