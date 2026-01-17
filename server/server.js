@@ -42,6 +42,7 @@ async function saveUsers(users) {
 }
 
 app.get('/health', (req, res) => {
+    res.setHeader('X-App-Server', 'AccountableFutures');
     res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 

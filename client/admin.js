@@ -6,6 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPosts = document.getElementById("total-posts");
     const usersTableBody = document.getElementById("users-table-body");
 
+    const getApiBase = () => {
+        if (window.location.protocol === 'file:' || !window.location.origin.includes(':3000')) {
+            return 'http://localhost:3000';
+        }
+        return '';
+    };
+
+    const API_BASE = getApiBase();
+
     let token = null;
 
     adminLoginForm.addEventListener("submit", async (e) => {
@@ -13,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = document.getElementById("admin-username").value;
         const password = document.getElementById("admin-password").value;
 
-        const response = await fetch("/admin/login", {
+        const response = await fetch(API_BASE + "/admin/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -43,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const postsResponse = await fetch("/posts", {
+        const postsResponse = await fetch(API_BASE + "/posts", {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -61,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const usersResponse = await fetch("/users", {
+        const usersResponse = await fetch(API_BASE + "/users", {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -85,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.classList.contains("delete-button")) {
             const email = e.target.dataset.email;
             if (confirm(`Are you sure you want to delete the user with email ${email}?`)) {
-                await fetch(`/users/${email}`, {
+                await fetch(`${API_BASE}/users/${email}`, {
                     method: "DELETE",
                     headers: {
                         "Authorization": `Bearer ${token}`

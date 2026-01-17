@@ -52,6 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUI(mode);
     });
 
+    const getApiBase = () => {
+        // If we are on file:// or if the origin doesn't include port 3000,
+        // we might be running a static server (like port 5500).
+        // In that case, we should explicitly hit the backend on port 3000.
+        if (window.location.protocol === 'file:' || !window.location.origin.includes(':3000')) {
+            return 'http://localhost:3000';
+        }
+        return ''; // Relative path
+    };
+
+    const API_BASE = getApiBase();
+
     // Check for file:// protocol
     if (window.location.protocol === 'file:') {
         showError('<strong>Warning:</strong> You are accessing this page via the <code>file://</code> protocol. Signup and Signin will NOT work. Please run the server and access via <code>http://localhost:3000</code>.');
@@ -64,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkServerHealth = async () => {
         if (!serverStatus) return;
         try {
-            const res = await fetch('/health');
+            const res = await fetch(API_BASE + '/health');
             if (res.ok) {
                 serverStatus.innerHTML = '<span style="color: #6a994e;">● Server Connected</span>';
             } else {
@@ -114,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         hideError();
         const isSignUp = window.location.hash !== '#signin';
-        const endpoint = isSignUp ? '/signup' : '/login';
+        const endpoint = API_BASE + (isSignUp ? '/signup' : '/login');
 
         console.log(`Form submitted for ${isSignUp ? 'signup' : 'login'} at ${endpoint}`);
 
@@ -193,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error:', error);
-            showError(`<strong>Network Error:</strong> ${error.message}<br>Please ensure the server is running on port 3000.`);
+            showError(`<strong>Network Error:</strong> ${error.message}<br>Please ensure the server is running on port 3000 and CORS allows requests from this origin.`);
             submitBtn.textContent = originalBtnText;
             submitBtn.disabled = false;
         }

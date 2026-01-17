@@ -4,6 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const newPostForm = document.getElementById("new-post-form");
     let token = localStorage.getItem('token');
 
+    const getApiBase = () => {
+        if (window.location.protocol === 'file:' || !window.location.origin.includes(':3000')) {
+            return 'http://localhost:3000';
+        }
+        return '';
+    };
+
+    const API_BASE = getApiBase();
+
     const fetchPosts = async () => {
         if (!token) {
             postContainer.innerHTML = `
@@ -15,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (newPostFormContainer) newPostFormContainer.style.display = 'none';
             return;
         }
-        const response = await fetch("/posts", {
+        const response = await fetch(API_BASE + "/posts", {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -49,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const title = document.getElementById("post-title").value;
         const content = document.getElementById("post-content").value;
-        await fetch("/posts", {
+        await fetch(API_BASE + "/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -63,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     postContainer.addEventListener("click", async (e) => {
         if (e.target.classList.contains("like-button")) {
             const postId = e.target.dataset.id;
-            await fetch(`/posts/${postId}/like`, {
+            await fetch(`${API_BASE}/posts/${postId}/like`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -84,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             const postId = e.target.dataset.id;
             const comment = e.target.querySelector("input").value;
-            await fetch(`/posts/${postId}/comment`, {
+            await fetch(`${API_BASE}/posts/${postId}/comment`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
