@@ -53,13 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const getApiBase = () => {
-        // If we are on file:// or if the origin doesn't include port 3000,
-        // we might be running a static server (like port 5500).
-        // In that case, we should explicitly hit the backend on port 3000.
-        if (window.location.protocol === 'file:' || !window.location.origin.includes(':3000')) {
+        if (window.location.protocol === 'file:') {
             return 'http://localhost:3000';
         }
-        return ''; // Relative path
+        const protocol = window.location.protocol;
+        const hostname = window.location.hostname;
+        if (!window.location.port || window.location.port !== '3000') {
+            return `${protocol}//${hostname}:3000`;
+        }
+        return '';
     };
 
     const API_BASE = getApiBase();

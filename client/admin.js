@@ -7,8 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const usersTableBody = document.getElementById("users-table-body");
 
     const getApiBase = () => {
-        if (window.location.protocol === 'file:' || !window.location.origin.includes(':3000')) {
+        if (window.location.protocol === 'file:') {
             return 'http://localhost:3000';
+        }
+        const protocol = window.location.protocol;
+        const hostname = window.location.hostname;
+        if (!window.location.port || window.location.port !== '3000') {
+            return `${protocol}//${hostname}:3000`;
         }
         return '';
     };
