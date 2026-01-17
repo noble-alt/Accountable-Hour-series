@@ -64,6 +64,21 @@
       "fullname": "Verify User",
       "email": "verify@example.com",
       "password": "$2b$10$1EvQiVrv1Z0uLg4WLK.vjeI9VHp4uHkkYPQZrB5GA4bKc/CDhPrgG"
+    },
+    {
+      "fullname": "Log Test",
+      "email": "logtest@example.com",
+      "password": "$2b$10$hcuCbqPHkh5hC.jKeATgruYL4voDxFH8tt65pyAABVvizTb7GQgQq"
+    },
+    {
+      "fullname": "Full Flow Test",
+      "email": "user_95939@example.com",
+      "password": "$2b$10$0p8zZGA7WrlO2VdtT3s.hO8JeW6Nk/YnR58mGD4PF0zGdU8/zGlxi"
+    },
+    {
+      "fullname": "Existing",
+      "email": "dup_4021@example.com",
+      "password": "$2b$10$83FGIDUtMJgMX5d6oitbE.Ir64gEiofQA9jhx3Ii689WFtuUoCd0y"
     }
   ],
   "posts": [

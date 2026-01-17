@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const fs = require('fs').promises;
 const path = require('path');
 const jwt = require('jsonwebtoken');
@@ -8,6 +8,18 @@ const jwt = require('jsonwebtoken');
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Request logging middleware
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    if (req.method === 'POST' && req.body) {
+        const loggedBody = { ...req.body };
+        if (loggedBody.password) loggedBody.password = '***';
+        console.log('Body:', loggedBody);
+    }
+    next();
+});
+
 app.use(express.static(path.join(__dirname, '../client')));
 
 const dbPath = path.join(__dirname, 'db.json');
@@ -28,6 +40,10 @@ async function getUsers() {
 async function saveUsers(users) {
     await fs.writeFile(dbPath, JSON.stringify(users, null, 2), 'utf8');
 }
+
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 app.post('/signup', async (req, res) => {
     let { fullname, email, password } = req.body;
@@ -185,7 +201,13 @@ app.post('/posts/:id/comment', authMiddleware, async (req, res) => {
     }
 });
 
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error('Unhandled Error:', err);
+    res.status(500).json({ message: 'Internal Server Error', error: err.message });
+});
+
 const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
