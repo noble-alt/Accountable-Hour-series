@@ -613,6 +613,13 @@ button:hover {
   font-weight: 600;
 }
 
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: #eef1dc;
+    cursor: pointer;
+}
+
 /* =========================
    RESPONSIVE DESIGN
 ========================= */
@@ -628,10 +635,42 @@ button:hover {
   }
 }
 
-/* TABLETS */
+/* TABLETS & IPADS */
 @media (max-width: 992px) {
   .navbar {
     padding: 20px 30px;
+  }
+
+  .menu-toggle {
+    display: block;
+    order: 2;
+  }
+
+  .logo {
+      order: 1;
+  }
+
+  .nav-actions {
+      order: 3;
+      display: none; /* Hide actions on very small screens or move them into nav */
+  }
+
+  .navbar nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #091c20;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    border-top: 1px solid rgba(238, 241, 220, 0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  }
+
+  .navbar nav.active {
+    display: flex;
   }
 
   .hero h1 {
@@ -641,11 +680,20 @@ button:hover {
   .mentor-grid {
     flex-direction: column;
     align-items: center;
+    gap: 60px;
+  }
+
+  .mentor.large {
+      margin: 0;
   }
 
   .stats {
     flex-direction: column;
     gap: 30px;
+  }
+
+  .stats::before {
+      display: none;
   }
 
   .event {
@@ -654,6 +702,7 @@ button:hover {
 
   .event-img {
     width: 100%;
+    height: 300px;
   }
 
   .join-card {
@@ -668,21 +717,30 @@ button:hover {
   }
 
   .footer-bottom {
-    flex-direction: column;
-    gap: 30px;
+    display: block;
+  }
+
+  .footer-info {
+      grid-template-columns: 1fr;
+      gap: 20px;
   }
 
   .footer-right {
     text-align: left;
+    margin-top: 40px;
+  }
+
+  .footer-socials {
+      justify-content: flex-start;
+  }
+
+  .footer-policy {
+      justify-content: flex-start;
   }
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .navbar nav {
-    display: none;
-  }
-
   .hero {
     padding: 90px 20px;
   }
@@ -713,11 +771,18 @@ button:hover {
   .footer-links {
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: flex-start;
   }
 
   .footer-logos {
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: flex-start;
+  }
+
+  .center {
+      margin-left: 0;
+      margin-right: 0;
   }
 }
 

@@ -186,3 +186,21 @@ h1 {
 .social-login i:hover {
     background-color: #4a5568;
 }
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 480px) {
+    .login-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .input-group input {
+        padding: 15px 40px;
+    }
+}

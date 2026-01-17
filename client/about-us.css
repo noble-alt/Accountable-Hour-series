@@ -219,3 +219,112 @@ body {
 .footer-links a { color: #8F9A98; text-decoration: none; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1a302d; padding-top: 30px; }
 .socials { display: flex; gap: 20px; font-size: 1.2rem; }
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 20px 30px;
+    }
+
+    .navbar nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #091c20;
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px;
+        z-index: 1000;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .navbar nav.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 24px;
+        color: #eef1dc;
+        cursor: pointer;
+    }
+
+    .nav-actions {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 60px 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-text p {
+        max-width: 100%;
+    }
+
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-1 {
+        grid-row: span 1;
+    }
+
+    .stats-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-row {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .content-row.reverse {
+        flex-direction: column;
+    }
+
+    .team-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta-outline {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        padding: 40px 20px;
+    }
+
+    .cta-content {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}

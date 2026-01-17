@@ -342,3 +342,83 @@ footer {
 .footer a {
   color: #000;
 }
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 20px 30px;
+    }
+
+    .navbar nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #091c20;
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px;
+        z-index: 1000;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .navbar nav.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 24px;
+        color: #eef1dc;
+        cursor: pointer;
+    }
+
+    .nav-actions {
+        display: none;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .sidebar {
+        display: none; /* Can be toggled or moved later */
+    }
+
+    .card-main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .mentor-image {
+        width: 100%;
+        height: 300px;
+        margin-bottom: 20px;
+    }
+
+    .mentor-info {
+        padding-left: 0;
+    }
+
+    .mentor-header {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .card-footer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .view-profile {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}
